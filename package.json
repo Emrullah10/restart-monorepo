@@ -1,0 +1,24 @@
+{
+  "name": "restart-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "core/*",
+    "services/*",
+    "packages/modules/*"
+  ],
+  "scripts": {
+    "dev:iam": "npm run dev -w restart-service-iam",
+    "dev:operation": "npm run dev -w restart-service-operation",
+    "dev:marketplace": "npm run dev -w restart-service-marketplace",
+    "dev:gateway": "npm run dev -w restart-web-gateway",
+    "start:iam": "npm run start -w restart-service-iam",
+    "start:operation": "npm run start -w restart-service-operation",
+    "start:marketplace": "npm run start -w restart-service-marketplace",
+    "start:gateway": "npm run start -w restart-web-gateway"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}

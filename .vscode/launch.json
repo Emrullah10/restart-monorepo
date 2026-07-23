@@ -1,0 +1,44 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Backend: IAM Service",
+            "request": "launch",
+            "type": "node",
+            "cwd": "${workspaceFolder}/services/restart-service-iam",
+            "program": "${workspaceFolder}/services/restart-service-iam/main.js"
+        },
+        {
+            "name": "Backend: Marketplace Service",
+            "request": "launch",
+            "type": "node",
+            "cwd": "${workspaceFolder}/services/restart-service-marketplace",
+            "program": "${workspaceFolder}/services/restart-service-marketplace/main.js"
+        },
+        {
+            "name": "Backend: Operation Service",
+            "request": "launch",
+            "type": "node",
+            "cwd": "${workspaceFolder}/services/restart-service-operation",
+            "program": "${workspaceFolder}/services/restart-service-operation/main.js"
+        },
+        {
+            "name": "Backend: Web Gateway",
+            "request": "launch",
+            "type": "node",
+            "cwd": "${workspaceFolder}/services/restart-web-gateway",
+            "program": "${workspaceFolder}/services/restart-web-gateway/main.js"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "All Backend Services",
+            "configurations": [
+                "Backend: IAM Service",
+                "Backend: Marketplace Service",
+                "Backend: Operation Service",
+                "Backend: Web Gateway"
+            ]
+        }
+    ]
+}

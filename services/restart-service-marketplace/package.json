@@ -1,0 +1,19 @@
+{
+  "name": "restart-service-marketplace",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "dev": "nodemon main.js"
+  },
+  "dependencies": {
+    "@restart/core-marketplace": "*",
+    "@restart/config": "*",
+    "@restart/datasource": "*",
+    "@restart/errors": "*",
+    "@restart/middlewares": "*",
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  }
+}
