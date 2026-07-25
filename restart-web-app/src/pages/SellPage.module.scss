@@ -1,0 +1,227 @@
+@import '@styles/variables';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 4px;
+
+  [data-theme='light'] & { color: $text-primary-light; }
+  [data-theme='dark'] & { color: $text-primary-dark; }
+}
+
+.subtitle {
+  font-size: 15px;
+
+  [data-theme='light'] & { color: $text-secondary-light; }
+  [data-theme='dark'] & { color: $text-secondary-dark; }
+}
+
+.bannerCard {
+  background: linear-gradient(135deg, rgba(#f59e0b, 0.12) 0%, rgba(#f97316, 0.05) 100%) !important;
+  border: 1px solid rgba(#f59e0b, 0.3) !important;
+}
+
+.bannerContent {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.bannerIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(#f59e0b, 0.2);
+  color: #f59e0b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.bannerTitle {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
+
+  [data-theme='light'] & { color: $text-primary-light; }
+  [data-theme='dark'] & { color: $text-primary-dark; }
+}
+
+.bannerSub {
+  font-size: 14px;
+
+  [data-theme='light'] & { color: $text-secondary-light; }
+  [data-theme='dark'] & { color: $text-secondary-dark; }
+}
+
+.categoryBar {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.chip {
+  padding: 10px 20px;
+  border-radius: $radius-pill;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+
+  [data-theme='light'] & {
+    background: #ffffff;
+    color: $text-secondary-light;
+    border: 1px solid $border-light;
+  }
+
+  [data-theme='dark'] & {
+    background: $surface-dark;
+    color: $text-secondary-dark;
+    border: 1px solid $border-dark;
+  }
+
+  &:hover {
+    color: $primary;
+    border-color: $primary;
+  }
+}
+
+.activeChip {
+  background: $primary-gradient !important;
+  color: white !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.gridSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sectionTitle {
+  font-size: 22px;
+  font-weight: 700;
+
+  [data-theme='light'] & { color: $text-primary-light; }
+  [data-theme='dark'] & { color: $text-primary-dark; }
+}
+
+.productsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+
+  @media (max-width: 1100px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.productCard {
+  display: flex;
+  flex-direction: column;
+  padding: 16px !important;
+  gap: 14px;
+}
+
+.imageBox {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  border-radius: $radius-md;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.statusBadge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 4px 10px;
+  border-radius: $radius-pill;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.productDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.prodTitle {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.3;
+
+  [data-theme='light'] & { color: $text-primary-light; }
+  [data-theme='dark'] & { color: $text-primary-dark; }
+}
+
+.sellerText {
+  font-size: 12px;
+
+  [data-theme='light'] & { color: $text-secondary-light; }
+  [data-theme='dark'] & { color: $text-secondary-dark; }
+}
+
+.priceRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: 800;
+  color: $primary;
+}
+
+.detailBtn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: $primary;
+  padding: 6px 12px;
+  border-radius: $radius-sm;
+
+  &:hover {
+    background: rgba($primary, 0.1);
+  }
+}

@@ -1,0 +1,375 @@
+@import '@styles/variables';
+@import '@styles/mixins';
+
+.layoutContainer {
+  display: flex;
+  min-height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+
+  [data-theme='light'] & {
+    background-color: $bg-light;
+  }
+
+  [data-theme='dark'] & {
+    background-color: $bg-dark;
+  }
+}
+
+// Sidebar Desktop Styles
+.sidebar {
+  width: 260px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  transition: all 0.2s ease;
+
+  @include mobile {
+    display: none;
+  }
+
+  [data-theme='light'] & {
+    background: rgba(#ffffff, 0.85);
+    backdrop-filter: blur(16px);
+    border-right: 1px solid $border-light;
+  }
+
+  [data-theme='dark'] & {
+    background: rgba($surface-dark, 0.85);
+    backdrop-filter: blur(16px);
+    border-right: 1px solid $border-dark;
+  }
+}
+
+.sidebarHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 36px;
+}
+
+.logoBadge {
+  width: 42px;
+  height: 42px;
+  border-radius: $radius-md;
+  background: rgba($primary, 0.12);
+  color: $primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoText {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+
+  [data-theme='light'] & {
+    color: $text-primary-light;
+  }
+
+  [data-theme='dark'] & {
+    color: $text-primary-dark;
+  }
+}
+
+.navMenu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  border-radius: $radius-md;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.2s ease;
+
+  [data-theme='light'] & {
+    color: $text-secondary-light;
+    &:hover {
+      background: rgba($primary, 0.08);
+      color: $primary;
+    }
+  }
+
+  [data-theme='dark'] & {
+    color: $text-secondary-dark;
+    &:hover {
+      background: rgba($primary, 0.15);
+      color: $primary;
+    }
+  }
+}
+
+.activeNavItem {
+  background: $primary-gradient !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.sidebarFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid rgba(100, 116, 139, 0.15);
+}
+
+.profileLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex: 1;
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid $primary;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+
+  .userName {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.2;
+
+    [data-theme='light'] & { color: $text-primary-light; }
+    [data-theme='dark'] & { color: $text-primary-dark; }
+  }
+
+  .userRole {
+    font-size: 11px;
+    color: $primary;
+    font-weight: 600;
+  }
+}
+
+.logoutBtn {
+  color: $text-secondary-light;
+  padding: 8px;
+  border-radius: $radius-sm;
+
+  [data-theme='dark'] & { color: $text-secondary-dark; }
+
+  &:hover {
+    color: $error;
+    background: rgba($error, 0.1);
+  }
+}
+
+// Main Area Layout
+.mainWrapper {
+  flex: 1;
+  margin-left: 260px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: calc(100% - 260px);
+
+  @include mobile {
+    margin-left: 0;
+    width: 100%;
+    padding-bottom: 90px;
+  }
+}
+
+.topHeader {
+  height: 70px;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 90;
+
+  [data-theme='light'] & {
+    background: rgba($bg-light, 0.8);
+    backdrop-filter: blur(12px);
+  }
+
+  [data-theme='dark'] & {
+    background: rgba($bg-dark, 0.8);
+    backdrop-filter: blur(12px);
+  }
+
+  @include mobile {
+    padding: 0 16px;
+  }
+}
+
+.headerTitleArea {
+  .greeting {
+    font-size: 18px;
+    font-weight: 700;
+
+    [data-theme='light'] & { color: $text-primary-light; }
+    [data-theme='dark'] & { color: $text-primary-dark; }
+  }
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.createListingBtn {
+  @include gradient-button;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: $radius-pill;
+}
+
+.iconBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.2s ease;
+
+  [data-theme='light'] & {
+    background: #ffffff;
+    color: $icon-light;
+    border: 1px solid $border-light;
+  }
+
+  [data-theme='dark'] & {
+    background: $surface-dark;
+    color: $icon-dark;
+    border: 1px solid $border-dark;
+  }
+
+  &:hover {
+    color: $primary;
+  }
+}
+
+.notificationDot {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: $error;
+}
+
+.pageContent {
+  padding: 32px;
+  flex: 1;
+  max-width: 1300px;
+  width: 100%;
+  margin: 0 auto;
+
+  @include mobile {
+    padding: 16px;
+  }
+}
+
+// Mobile FAB
+.mobileFab {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: $primary-gradient;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+  z-index: 110;
+
+  @include desktop {
+    display: none;
+  }
+}
+
+// Mobile Bottom Nav Bar (Matching Flutter nav_bar.dart glassmorphism)
+.bottomNav {
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  z-index: 100;
+
+  @include desktop {
+    display: none;
+  }
+}
+
+.bottomNavGlass {
+  @include glassmorphism(0.7, 12px);
+  border-radius: $radius-pill;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  box-shadow: $shadow-glass;
+}
+
+.bottomNavItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  color: $text-secondary-light;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 4px;
+
+  [data-theme='dark'] & {
+    color: $text-secondary-dark;
+  }
+}
+
+.bottomIconWrapper {
+  padding: 6px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.bottomNavActive {
+  color: $primary !important;
+
+  .bottomIconWrapper {
+    background: rgba($primary, 0.12);
+    color: $primary;
+    transform: scale(1.1);
+  }
+}
+
+.bottomLabel {
+  font-size: 10px;
+  font-weight: 700;
+}

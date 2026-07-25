@@ -6,13 +6,16 @@
   "workspaces": [
     "core/*",
     "services/*",
-    "packages/modules/*"
+    "packages/modules/*",
+    "restart-web-app"
   ],
   "scripts": {
+    "dev:web": "npm run dev -w restart-web-app",
     "dev:iam": "npm run dev -w restart-service-iam",
     "dev:operation": "npm run dev -w restart-service-operation",
     "dev:marketplace": "npm run dev -w restart-service-marketplace",
     "dev:gateway": "npm run dev -w restart-web-gateway",
+    "start:web": "npm run start -w restart-web-app",
     "start:iam": "npm run start -w restart-service-iam",
     "start:operation": "npm run start -w restart-service-operation",
     "start:marketplace": "npm run start -w restart-service-marketplace",

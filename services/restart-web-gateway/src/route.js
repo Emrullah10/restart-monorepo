@@ -50,6 +50,7 @@ export const buildRouter = () => {
 
   router.use(
     '/api/marketplace',
+    requireAuth,
     createProxyMiddleware({ target: serviceTargets.marketplace, changeOrigin: true })
   );
 

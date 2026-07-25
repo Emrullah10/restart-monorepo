@@ -1,0 +1,159 @@
+@import '@styles/variables';
+@import '@styles/mixins';
+
+.wrapper {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  position: relative;
+  overflow-x: hidden;
+
+  [data-theme='light'] & {
+    background-color: $bg-light;
+  }
+
+  [data-theme='dark'] & {
+    background-color: $bg-dark;
+  }
+}
+
+.topControls {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.heroSection {
+  flex: 1;
+  background: $primary-gradient;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 60px;
+  overflow: hidden;
+
+  @include mobile {
+    display: none;
+  }
+}
+
+.heroContent {
+  position: relative;
+  z-index: 10;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.logoBadge {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+}
+
+.logoIcon {
+  color: white;
+  animation: rotateSlow 20s linear infinite;
+}
+
+@keyframes rotateSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.brandTitle {
+  font-size: 48px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 12px;
+}
+
+.brandSubtitle {
+  font-size: 20px;
+  opacity: 0.9;
+  max-width: 400px;
+  line-height: 1.5;
+  margin-bottom: 32px;
+}
+
+.heroBadges {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.heroChip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: $radius-pill;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.glassCard {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+}
+
+.shape1 {
+  width: 220px;
+  height: 220px;
+  top: 10%;
+  left: -40px;
+  transform: rotate(-15deg);
+}
+
+.shape2 {
+  width: 180px;
+  height: 180px;
+  bottom: 12%;
+  right: -30px;
+  transform: rotate(12deg);
+}
+
+.formSection {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+
+  @include mobile {
+    padding-top: 80px;
+  }
+}
+
+.formWrapper {
+  width: 100%;
+  max-width: 440px;
+}

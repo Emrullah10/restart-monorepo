@@ -1,0 +1,57 @@
+@import '@styles/variables';
+
+.card {
+  background: linear-gradient(135deg, rgba($primary, 0.12) 0%, rgba($primary-dark, 0.04) 100%) !important;
+  border: 1px solid rgba($primary, 0.2) !important;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 14px;
+
+  [data-theme='light'] & { color: $text-secondary-light; }
+  [data-theme='dark'] & { color: $text-secondary-dark; }
+}
+
+.valueRow {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.number {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+
+  [data-theme='light'] & { color: $text-primary-light; }
+  [data-theme='dark'] & { color: $text-primary-dark; }
+}
+
+.unit {
+  font-size: 22px;
+  font-weight: 600;
+  color: $primary;
+}
+
+.iconCircle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba($primary, 0.15);
+  color: $primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

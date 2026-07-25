@@ -1,0 +1,23 @@
+@import 'variables';
+@import 'mixins';
+@import 'reset';
+@import 'animations';
+
+// Global Scrollbar
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.2);
+  border-radius: 4px;
+
+  &:hover {
+    background: rgba(100, 116, 139, 0.4);
+  }
+}
