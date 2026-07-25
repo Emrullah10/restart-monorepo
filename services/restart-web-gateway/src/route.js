@@ -34,6 +34,13 @@ export const buildRouter = () => {
 
   router.use(
     '/api/rewards',
+    requireAuth,
+    createProxyMiddleware({ target: serviceTargets.iam, changeOrigin: true })
+  );
+
+  router.use(
+    '/api/notifications',
+    requireAuth,
     createProxyMiddleware({ target: serviceTargets.iam, changeOrigin: true })
   );
 

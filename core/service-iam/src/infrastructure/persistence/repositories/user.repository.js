@@ -1,3 +1,4 @@
+import { ValidationError } from '@restart/errors';
 import { makeUser } from '../../../domain/entities/user.entity.js';
 import { makeDefaultUserStats, makeUserStats } from '../../../domain/entities/user-stats.entity.js';
 
@@ -86,5 +87,85 @@ export const makeUserRepository = ({ query }) => ({
     if (result.rows.length === 0) return null;
     const row = result.rows[0];
     return { rank: Number(row.rank), fullName: row.full_name, totalPoints: row.total_points };
+  },
+
+  getRewards: async () => {
+    const result = await query(
+      'SELECT * FROM rewards WHERE is_active = true ORDER BY points_cost ASC'
+    );
+    return result.rows.map((row) => ({
+      id: row.id,
+      title: row.title,
+      subtitle: row.subtitle,
+      pointsCost: row.points_cost,
+      imageUrl: row.image_url,
+    }));
+  },
+
+  redeemReward: async ({ userId, rewardId }) => {
+    const rewardResult = await query(
+      'SELECT * FROM rewards WHERE id = $1 AND is_active = true',
+      [rewardId]
+    );
+    if (rewardResult.rows.length === 0) {
+      throw new ValidationError('Reward not found');
+    }
+    const reward = rewardResult.rows[0];
+
+    const statsResult = await query(
+      'SELECT total_points FROM user_stats WHERE user_id = $1',
+      [userId]
+    );
+    const currentPoints = statsResult.rows[0]?.total_points ?? 0;
+    if (currentPoints < reward.points_cost) {
+      throw new ValidationError('Insufficient points');
+    }
+
+    await query(
+      'UPDATE user_stats SET total_points = total_points - $1 WHERE user_id = $2',
+      [reward.points_cost, userId]
+    );
+
+    const redemptionResult = await query(
+      `INSERT INTO reward_redemptions (user_id, reward_id, points_spent)
+       VALUES ($1, $2, $3) RETURNING *`,
+      [userId, rewardId, reward.points_cost]
+    );
+
+    await query(
+      `INSERT INTO activities (user_id, activity_type, title, description, points_earned)
+       VALUES ($1, 'reward', 'Ödül Kullanıldı', $2, $3)`,
+      [userId, `${reward.title} ödülü kullanıldı`, -reward.points_cost]
+    );
+
+    return {
+      id: redemptionResult.rows[0].id,
+      rewardId,
+      pointsSpent: reward.points_cost,
+      remainingPoints: currentPoints - reward.points_cost,
+    };
+  },
+
+  getNotifications: async (userId) => {
+    const result = await query(
+      'SELECT * FROM notifications WHERE user_id = $1 ORDER BY created_at DESC',
+      [userId]
+    );
+    return result.rows.map((row) => ({
+      id: row.id,
+      type: row.type,
+      title: row.title,
+      body: row.body,
+      isRead: row.is_read,
+      createdAt: row.created_at,
+    }));
+  },
+
+  markNotificationRead: async (notificationId) => {
+    await query('UPDATE notifications SET is_read = true WHERE id = $1', [notificationId]);
+  },
+
+  markAllNotificationsRead: async (userId) => {
+    await query('UPDATE notifications SET is_read = true WHERE user_id = $1', [userId]);
   },
 });

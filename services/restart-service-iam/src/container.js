@@ -8,11 +8,15 @@ import { makeGetUserProfile } from '@restart/core-iam/src/application/use-cases/
 import { makeGetLeaderboard } from '@restart/core-iam/src/application/use-cases/get-leaderboard.use-case.js';
 import { makeGetUserBadges } from '@restart/core-iam/src/application/use-cases/get-user-badges.use-case.js';
 import { makeGetRewards } from '@restart/core-iam/src/application/use-cases/get-rewards.use-case.js';
+import { makeRedeemReward } from '@restart/core-iam/src/application/use-cases/redeem-reward.use-case.js';
 import { makeSubmitContactMessage } from '@restart/core-iam/src/application/use-cases/submit-contact-message.use-case.js';
+import { makeGetNotifications } from '@restart/core-iam/src/application/use-cases/get-notifications.use-case.js';
+import { makeMarkNotificationRead, makeMarkAllNotificationsRead } from '@restart/core-iam/src/application/use-cases/mark-notifications-read.use-case.js';
 import { makeUsersController } from '@restart/core-iam/src/interfaces/http/users.controller.js';
 import { makeGamificationController } from '@restart/core-iam/src/interfaces/http/gamification.controller.js';
 import { makeMiscController } from '@restart/core-iam/src/interfaces/http/misc.controller.js';
-import { createAuthRoutes, createUserRoutes, createGamificationRoutes, createMiscRoutes } from '@restart/core-iam/src/interfaces/http/routes.js';
+import { makeNotificationsController } from '@restart/core-iam/src/interfaces/http/notifications.controller.js';
+import { createAuthRoutes, createUserRoutes, createGamificationRoutes, createMiscRoutes, createNotificationsRoutes } from '@restart/core-iam/src/interfaces/http/routes.js';
 import { jwtSecret } from '../configs/app-config.js';
 
 export const buildContainer = ({ datasourceConfig = makeDatasourceConfig(), translateHttpErrors = true } = {}) => {
@@ -26,8 +30,12 @@ export const buildContainer = ({ datasourceConfig = makeDatasourceConfig(), tran
   const getUserProfile = makeGetUserProfile({ userRepo });
   const getLeaderboard = makeGetLeaderboard({ userRepo });
   const getUserBadges = makeGetUserBadges({ userRepo });
-  const getRewards = makeGetRewards();
+  const getRewards = makeGetRewards({ userRepo });
+  const redeemReward = makeRedeemReward({ userRepo });
   const submitContactMessage = makeSubmitContactMessage();
+  const getNotifications = makeGetNotifications({ userRepo });
+  const markNotificationRead = makeMarkNotificationRead({ userRepo });
+  const markAllNotificationsRead = makeMarkAllNotificationsRead({ userRepo });
 
   const usersController = makeUsersController({ registerUser, loginUser, getUserProfile });
   const wrappedController = {
@@ -42,10 +50,22 @@ export const buildContainer = ({ datasourceConfig = makeDatasourceConfig(), tran
     getUserBadges: wrap(gamificationController.getUserBadges),
   };
 
-  const miscController = makeMiscController({ getRewards, submitContactMessage });
+  const miscController = makeMiscController({ getRewards, submitContactMessage, redeemReward });
   const wrappedMiscController = {
     getRewards: wrap(miscController.getRewards),
+    redeemReward: wrap(miscController.redeemReward),
     submitContactMessage: wrap(miscController.submitContactMessage),
+  };
+
+  const notificationsController = makeNotificationsController({
+    getNotifications,
+    markNotificationRead,
+    markAllNotificationsRead,
+  });
+  const wrappedNotificationsController = {
+    getNotifications: wrap(notificationsController.getNotifications),
+    markRead: wrap(notificationsController.markRead),
+    markAllRead: wrap(notificationsController.markAllRead),
   };
 
   return {
@@ -53,5 +73,6 @@ export const buildContainer = ({ datasourceConfig = makeDatasourceConfig(), tran
     userRoutes: createUserRoutes({ usersController: wrappedController }),
     gamificationRoutes: createGamificationRoutes({ gamificationController: wrappedGamificationController }),
     miscRoutes: createMiscRoutes({ miscController: wrappedMiscController }),
+    notificationsRoutes: createNotificationsRoutes({ notificationsController: wrappedNotificationsController }),
   };
 };

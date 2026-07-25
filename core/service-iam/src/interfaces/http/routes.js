@@ -23,6 +23,15 @@ export const createGamificationRoutes = ({ gamificationController }) => {
 export const createMiscRoutes = ({ miscController }) => {
   const router = Router();
   router.get('/rewards', miscController.getRewards);
+  router.post('/rewards/redeem', miscController.redeemReward);
   router.post('/contact', miscController.submitContactMessage);
+  return router;
+};
+
+export const createNotificationsRoutes = ({ notificationsController }) => {
+  const router = Router();
+  router.get('/notifications/:userId', notificationsController.getNotifications);
+  router.patch('/notifications/:id/read', notificationsController.markRead);
+  router.patch('/notifications/:userId/read-all', notificationsController.markAllRead);
   return router;
 };
