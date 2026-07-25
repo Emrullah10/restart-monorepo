@@ -4,7 +4,6 @@ CREATE TABLE IF NOT EXISTS service_centers (
   type TEXT NOT NULL,
   latitude DOUBLE PRECISION,
   longitude DOUBLE PRECISION,
-  location GEOGRAPHY(Point, 4326),
   rating NUMERIC,
   tags TEXT,
   address TEXT,
@@ -47,5 +46,6 @@ CREATE TABLE IF NOT EXISTS couriers (
   capacity_kg NUMERIC,
   rating NUMERIC,
   total_deliveries INTEGER NOT NULL DEFAULT 0,
-  location GEOGRAPHY(Point, 4326)
+  latitude DOUBLE PRECISION,
+  longitude DOUBLE PRECISION
 );

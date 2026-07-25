@@ -12,3 +12,17 @@ export const createUserRoutes = ({ usersController }) => {
   router.get('/profile/:userId', usersController.getProfile);
   return router;
 };
+
+export const createGamificationRoutes = ({ gamificationController }) => {
+  const router = Router();
+  router.get('/leaderboard', gamificationController.getLeaderboard);
+  router.get('/badges/:userId', gamificationController.getUserBadges);
+  return router;
+};
+
+export const createMiscRoutes = ({ miscController }) => {
+  const router = Router();
+  router.get('/rewards', miscController.getRewards);
+  router.post('/contact', miscController.submitContactMessage);
+  return router;
+};

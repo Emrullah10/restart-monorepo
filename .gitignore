@@ -9,3 +9,6 @@ build/
 coverage/
 .vscode/*
 !.vscode/launch.json
+
+# Local docs (not tracked)
+/docs/

@@ -11,10 +11,12 @@ export const boot = () => {
   app.use(express.json());
   app.use(requestLogger(SERVICE_NAME));
 
-  const { authRoutes, userRoutes } = buildContainer();
+  const { authRoutes, userRoutes, gamificationRoutes, miscRoutes } = buildContainer();
 
   app.use('/api/auth', authRoutes);
   app.use('/api/user', userRoutes);
+  app.use('/api/gamification', gamificationRoutes);
+  app.use('/api', miscRoutes);
 
   app.get('/', (req, res) => {
     res.send('ReStart IAM Service - Clean Architecture & DDD');

@@ -32,7 +32,13 @@ export const makeUserRepository = ({ query }) => ({
       );
       return makeDefaultUserStats();
     }
-    return makeUserStats(result.rows[0]);
+    const row = result.rows[0];
+    return makeUserStats({
+      totalPoints: row.total_points,
+      totalEarnings: row.total_earnings,
+      repairedCount: row.repaired_count,
+      preventedWasteKg: row.prevented_waste_kg,
+    });
   },
 
   create: async (user) => {
@@ -46,5 +52,39 @@ export const makeUserRepository = ({ query }) => ({
     await query('INSERT INTO user_stats (user_id, total_points) VALUES ($1, 0)', [row.id]);
 
     return rowToUser(row);
+  },
+
+  getLeaderboard: async ({ limit = 3 } = {}) => {
+    const result = await query(
+      `SELECT u.id, u.full_name, s.total_points,
+              RANK() OVER (ORDER BY s.total_points DESC) AS rank
+       FROM user_stats s
+       JOIN users u ON u.id = s.user_id
+       ORDER BY s.total_points DESC
+       LIMIT $1`,
+      [limit]
+    );
+    return result.rows.map((row) => ({
+      rank: Number(row.rank),
+      userId: row.id,
+      fullName: row.full_name,
+      totalPoints: row.total_points,
+    }));
+  },
+
+  getUserRank: async (userId) => {
+    const result = await query(
+      `SELECT rank, full_name, total_points FROM (
+         SELECT u.id, u.full_name, s.total_points,
+                RANK() OVER (ORDER BY s.total_points DESC) AS rank
+         FROM user_stats s
+         JOIN users u ON u.id = s.user_id
+       ) ranked
+       WHERE id = $1`,
+      [userId]
+    );
+    if (result.rows.length === 0) return null;
+    const row = result.rows[0];
+    return { rank: Number(row.rank), fullName: row.full_name, totalPoints: row.total_points };
   },
 });
