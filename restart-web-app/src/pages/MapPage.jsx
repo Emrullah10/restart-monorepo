@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import { MapPin, Filter, Navigation } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import GlassCard from '@components/GlassCard/GlassCard';
+import { useServices } from '@hooks/queries/useServices';
 import styles from './MapPage.module.scss';
 
 // Fix Leaflet marker default icons in bundlers
@@ -21,20 +21,15 @@ export const MapPage = () => {
 
   const initialCenter = [41.0082, 28.9784]; // Istanbul center
 
-  const markers = [
-    { id: 1, name: 'Kadıköy E-Tamir & Yenileme', type: 'repair', lat: 40.9901, lng: 29.0291, address: 'Moda Cad. No:45, Kadıköy' },
-    { id: 2, name: 'Beşiktaş E-Atık Toplama Merkezi', type: 'recycle', lat: 41.0422, lng: 29.0083, address: 'Ihlamurdere Cad., Beşiktaş' },
-    { id: 3, name: 'ReStart Onaylı İkinci El Satış Noktası', type: 'sell', lat: 40.9782, lng: 29.0556, address: 'Bağdat Cad. No:112, Kadıköy' }
-  ];
-
-  const filteredMarkers = filter === 'all' ? markers : markers.filter(m => m.type === filter);
+  const { data: services, isLoading } = useServices(filter === 'all' ? undefined : filter);
+  const markers = services ?? [];
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <div>
           <h1 className={styles.title}>{t('navMap')} & Nokta Bulucu</h1>
-          <p className={styles.subtitle}>En yakın tamir servisini, geri dönüşüm kสม kutusunu veya satış mağazasını görün</p>
+          <p className={styles.subtitle}>En yakın tamir servisini, geri dönüşüm kutusunu veya satış mağazasını görün</p>
         </div>
 
         {/* Filter Controls */}
@@ -68,13 +63,14 @@ export const MapPage = () => {
 
       <GlassCard className={styles.mapCard} hoverEffect={false}>
         <div className={styles.mapWrapper}>
+          {isLoading && <div className={styles.mapLoading}>Yükleniyor...</div>}
           <MapContainer center={initialCenter} zoom={12} scrollWheelZoom={true} style={{ height: '100%', width: '100%' }}>
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            {filteredMarkers.map((m) => (
-              <Marker key={m.id} position={[m.lat, m.lng]}>
+            {markers.map((m) => (
+              <Marker key={m.id} position={[m.latitude, m.longitude]}>
                 <Popup>
                   <div className={styles.popupContent}>
                     <strong>{m.name}</strong>

@@ -55,6 +55,19 @@ export const buildRouter = () => {
     createProxyMiddleware({ target: serviceTargets.operation, changeOrigin: true, pathRewrite: { '^/api/operation': '/api' } })
   );
 
+  // Public marketplace browsing — must be registered before the guarded
+  // '/api/marketplace' catch-all below so visitors can view products and
+  // images without a session. Listings/upload remain behind requireAuth.
+  router.get(
+    '/api/marketplace/products',
+    createProxyMiddleware({ target: serviceTargets.marketplace, changeOrigin: true })
+  );
+
+  router.use(
+    '/api/marketplace/uploads',
+    createProxyMiddleware({ target: serviceTargets.marketplace, changeOrigin: true })
+  );
+
   router.use(
     '/api/marketplace',
     requireAuth,

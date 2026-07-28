@@ -15,17 +15,20 @@ import {
 } from 'lucide-react';
 import { useAuthStore } from '@store/authStore';
 import { authApi } from '@api/auth.api';
+import { useNotifications } from '@hooks/queries/useNotifications';
 import ThemeToggle from '@components/ThemeToggle/ThemeToggle';
 import LanguageToggle from '@components/LanguageToggle/LanguageToggle';
 import { useTranslation } from 'react-i18next';
 import styles from './MainLayout.module.scss';
 
-export const MainLayout = () => {
+export const MainLayout = ({ children }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
+  const { data: notifications } = useNotifications(user?.id);
+  const hasUnreadNotifications = (notifications ?? []).some((n) => !n.isRead);
 
   const handleLogout = async () => {
     try {
@@ -124,7 +127,7 @@ export const MainLayout = () => {
               title={t('navNotifications')}
             >
               <Bell size={20} />
-              <span className={styles.notificationDot} />
+              {hasUnreadNotifications && <span className={styles.notificationDot} />}
             </button>
 
             <button
@@ -141,8 +144,8 @@ export const MainLayout = () => {
         </header>
 
         {/* Page Content */}
-        <main className={styles.pageContent}>
-          <Outlet />
+        <main className={styles.pageContent} key={location.pathname}>
+          {children ?? <Outlet />}
         </main>
 
         {/* Mobile Floating Action Button (Only on Home Route) */}

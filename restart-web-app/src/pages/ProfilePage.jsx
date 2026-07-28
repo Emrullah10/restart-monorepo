@@ -1,11 +1,17 @@
 import React from 'react';
-import { User, Mail, Shield, Award, Leaf, Calendar } from 'lucide-react';
+import { Shield, Award, Leaf, Calendar } from 'lucide-react';
 import { useAuthStore } from '@store/authStore';
+import { useProfile } from '@hooks/queries/useProfile';
+import { useActivities } from '@hooks/queries/useActivities';
 import GlassCard from '@components/GlassCard/GlassCard';
 import styles from './ProfilePage.module.scss';
 
 export const ProfilePage = () => {
   const user = useAuthStore((state) => state.user);
+  const { data: profile } = useProfile(user?.id);
+  const { data: activities } = useActivities(user?.id, 100);
+
+  const stats = profile?.stats;
 
   return (
     <div className={styles.container}>
@@ -21,7 +27,6 @@ export const ProfilePage = () => {
             <p className={styles.email}>{user?.email || 'kullanici@restart.com'}</p>
             <div className={styles.badgeRow}>
               <span className={styles.tag}><Shield size={14} /> Doğrulanmış Hesap</span>
-              <span className={styles.tag}><Award size={14} /> Seviye 3 Eco Warrior</span>
             </div>
           </div>
         </div>
@@ -30,19 +35,19 @@ export const ProfilePage = () => {
       <div className={styles.statsGrid}>
         <GlassCard className={styles.statBox}>
           <Leaf size={24} className={styles.leafIcon} />
-          <span className={styles.statNum}>14.8 kg</span>
+          <span className={styles.statNum}>{stats?.co2Saved ?? 0} kg</span>
           <span className={styles.statLabel}>Kurtarılan CO₂</span>
         </GlassCard>
 
         <GlassCard className={styles.statBox}>
           <Award size={24} className={styles.awardIcon} />
-          <span className={styles.statNum}>1.850</span>
+          <span className={styles.statNum}>{stats?.totalPoints ?? 0}</span>
           <span className={styles.statLabel}>Toplanan Puan</span>
         </GlassCard>
 
         <GlassCard className={styles.statBox}>
           <Calendar size={24} className={styles.calIcon} />
-          <span className={styles.statNum}>8</span>
+          <span className={styles.statNum}>{activities?.length ?? 0}</span>
           <span className={styles.statLabel}>Toplam İşlem</span>
         </GlassCard>
       </div>

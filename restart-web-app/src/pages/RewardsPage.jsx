@@ -1,23 +1,23 @@
 import React from 'react';
-import { Award, Trophy, Gift, Zap } from 'lucide-react';
+import { Award, Trophy, Gift } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import GlassCard from '@components/GlassCard/GlassCard';
+import GradientButton from '@components/GradientButton/GradientButton';
+import EmptyState from '@components/EmptyState/EmptyState';
+import { useAuthStore } from '@store/authStore';
+import { useLeaderboard, useBadges, useRewards, useRedeemReward } from '@hooks/queries/useGamification';
 import styles from './RewardsPage.module.scss';
 
 export const RewardsPage = () => {
   const { t } = useTranslation();
+  const userId = useAuthStore((state) => state.user?.id);
 
-  const leaderboard = [
-    { rank: 1, name: 'Selin A.', points: '3.450 Puan', co2: '42.5 kg', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200' },
-    { rank: 2, name: 'Emre T.', points: '2.890 Puan', co2: '35.1 kg', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200' },
-    { rank: 3, name: 'Deniz Y.', points: '2.410 Puan', co2: '29.8 kg', avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=200' }
-  ];
+  const { data: leaderboardData, isLoading: leaderboardLoading } = useLeaderboard(userId, 3);
+  const { data: badges, isLoading: badgesLoading } = useBadges(userId);
+  const { data: rewards, isLoading: rewardsLoading } = useRewards();
+  const redeemReward = useRedeemReward(userId);
 
-  const badges = [
-    { title: 'Çevre Kahramanı', desc: '5 cihaz geri dönüştür', active: true, icon: '🌿' },
-    { title: 'E-Atık Avcısı', desc: '10kg e-atık önle', active: true, icon: '⚡' },
-    { title: 'İkinci El Ustası', desc: '3 ikinci el satış yap', active: false, icon: '🏆' }
-  ];
+  const topUsers = leaderboardData?.topUsers ?? [];
 
   return (
     <div className={styles.container}>
@@ -34,16 +34,19 @@ export const RewardsPage = () => {
             <h2 className={styles.cardTitle}>{t('leaderboardTitle')}</h2>
           </div>
 
+          {leaderboardLoading && <p className={styles.subtitle}>Yükleniyor...</p>}
+          {!leaderboardLoading && topUsers.length === 0 && (
+            <EmptyState title="Henüz sıralama verisi yok" subtitle="İlk işlemini yaparak liderlik tablosuna gir." />
+          )}
+
           <div className={styles.leaderboardList}>
-            {leaderboard.map((user) => (
+            {topUsers.map((user) => (
               <div key={user.rank} className={styles.leaderRow}>
                 <span className={styles.rankBadge}>#{user.rank}</span>
-                <img src={user.avatar} alt={user.name} className={styles.avatar} />
                 <div className={styles.userInfo}>
-                  <span className={styles.userName}>{user.name}</span>
-                  <span className={styles.userSub}>{user.co2} CO₂ Engellendi</span>
+                  <span className={styles.userName}>{user.fullName}</span>
                 </div>
-                <span className={styles.points}>{user.points}</span>
+                <span className={styles.points}>{user.totalPoints} Puan</span>
               </div>
             ))}
           </div>
@@ -56,16 +59,52 @@ export const RewardsPage = () => {
             <h2 className={styles.cardTitle}>{t('badgesTitle')}</h2>
           </div>
 
+          {badgesLoading && <p className={styles.subtitle}>Yükleniyor...</p>}
+          {!badgesLoading && (badges ?? []).length === 0 && (
+            <EmptyState title="Henüz rozet kazanılmadı" subtitle="Geri dönüşüm ve satışlarla rozet kazanmaya başla." />
+          )}
+
           <div className={styles.badgesGrid}>
-            {badges.map((b, idx) => (
-              <div key={idx} className={`${styles.badgeBox} ${b.active ? styles.activeBadge : ''}`}>
-                <span className={styles.badgeEmoji}>{b.icon}</span>
-                <h4 className={styles.badgeTitle}>{b.title}</h4>
-                <p className={styles.badgeDesc}>{b.desc}</p>
+            {(badges ?? []).map((b) => (
+              <div key={b.name} className={`${styles.badgeBox} ${b.isUnlocked ? styles.activeBadge : ''}`}>
+                <span className={styles.badgeEmoji} style={b.color ? { color: b.color } : undefined}>{b.icon}</span>
+                <h4 className={styles.badgeTitle}>{b.name}</h4>
               </div>
             ))}
           </div>
         </GlassCard>
+      </div>
+
+      {/* Rewards Store */}
+      <div className={styles.rewardsSection}>
+        <div className={styles.cardHeader}>
+          <Gift size={24} className={styles.trophyIcon} />
+          <h2 className={styles.cardTitle}>{t('rewardsTitle')}</h2>
+        </div>
+
+        {rewardsLoading && <p className={styles.subtitle}>Yükleniyor...</p>}
+        {!rewardsLoading && (rewards ?? []).length === 0 && (
+          <EmptyState title="Şu anda kullanılabilir ödül yok" subtitle="Yakında yeni ödüller eklenecek." />
+        )}
+
+        <div className={styles.rewardsGrid}>
+          {(rewards ?? []).map((reward) => (
+            <GlassCard key={reward.id} className={styles.rewardCard} hoverEffect={false}>
+              <h4 className={styles.badgeTitle}>{reward.title}</h4>
+              {reward.subtitle && <p className={styles.badgeDesc}>{reward.subtitle}</p>}
+              <div className={styles.rewardFooter}>
+                <span className={styles.points}>{reward.pointsCost} Puan</span>
+                <GradientButton
+                  isLoading={redeemReward.isPending}
+                  disabled={!reward.isActive}
+                  onClick={() => redeemReward.mutate(reward.id)}
+                >
+                  Kullan
+                </GradientButton>
+              </div>
+            </GlassCard>
+          ))}
+        </div>
       </div>
     </div>
   );

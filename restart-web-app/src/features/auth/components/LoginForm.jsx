@@ -97,6 +97,12 @@ export const LoginForm = () => {
           {t('registerButton')}
         </Link>
       </div>
+
+      <div className={styles.footerLink}>
+        <Link to="/pazar" className={styles.linkAccent}>
+          Giriş yapmadan pazara göz at
+        </Link>
+      </div>
     </div>
   );
 };

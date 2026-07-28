@@ -1,5 +1,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useAuthStore } from '@store/authStore';
+import { useProfile } from '@hooks/queries/useProfile';
+import { useActivities } from '@hooks/queries/useActivities';
+import { useServices } from '@hooks/queries/useServices';
 import ImpactSummaryCard from '@features/home/components/ImpactSummaryCard';
 import ActionButtonsGrid from '@features/home/components/ActionButtonsGrid';
 import EnvironmentalImpactGrid from '@features/home/components/EnvironmentalImpactGrid';
@@ -9,6 +13,13 @@ import styles from './HomePage.module.scss';
 
 export const HomePage = () => {
   const { t } = useTranslation();
+  const userId = useAuthStore((state) => state.user?.id);
+
+  const { data: profile } = useProfile(userId);
+  const { data: activities } = useActivities(userId, 5);
+  const { data: services } = useServices();
+
+  const stats = profile?.stats;
 
   return (
     <div className={styles.pageContainer}>
@@ -17,7 +28,7 @@ export const HomePage = () => {
           <h1 className={styles.mainTitle}>{t('homeTitle')}</h1>
           <p className={styles.mainSubtitle}>{t('homeSubtitle')}</p>
         </div>
-        <ImpactSummaryCard co2Saved="14.8" />
+        <ImpactSummaryCard co2Saved={stats?.co2Saved ?? '0'} />
       </div>
 
       <div className={styles.sectionGroup}>
@@ -26,15 +37,15 @@ export const HomePage = () => {
       </div>
 
       <EnvironmentalImpactGrid
-        repairedCount={4}
-        preventedWasteKg={12.4}
-        totalEarnings={2150}
-        level={3}
+        repairedCount={stats?.repairedCount ?? 0}
+        preventedWasteKg={stats?.preventedWasteKg ?? 0}
+        totalEarnings={stats?.totalEarnings ?? 0}
+        level={stats?.level ?? 1}
       />
 
       <div className={styles.twoColumnGrid}>
-        <RecentActivityList />
-        <NearbyServicesList />
+        <RecentActivityList activities={activities ?? []} />
+        <NearbyServicesList services={services?.slice(0, 3) ?? []} />
       </div>
     </div>
   );

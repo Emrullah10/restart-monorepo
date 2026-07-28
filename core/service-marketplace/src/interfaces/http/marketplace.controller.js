@@ -1,7 +1,12 @@
-export const makeMarketplaceController = ({ getProducts, getUserListings, createListing, uploadImages }) => ({
+export const makeMarketplaceController = ({ getPublicListings, getUserListings, createListing, uploadImages }) => ({
   getProducts: async (req, res) => {
-    const products = await getProducts();
-    res.json(products);
+    const { category, q, limit } = req.query;
+    const listings = await getPublicListings({
+      category,
+      q,
+      limit: limit ? Number(limit) : undefined,
+    });
+    res.json(listings);
   },
 
   getUserListings: async (req, res) => {

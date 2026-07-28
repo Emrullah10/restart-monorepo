@@ -157,3 +157,32 @@
   font-size: 11px;
   opacity: 0.8;
 }
+
+.rewardsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.rewardsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.rewardCard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rewardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+}

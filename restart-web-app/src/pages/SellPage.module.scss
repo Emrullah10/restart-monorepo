@@ -74,46 +74,6 @@
   [data-theme='dark'] & { color: $text-secondary-dark; }
 }
 
-.categoryBar {
-  display: flex;
-  gap: 12px;
-  overflow-x: auto;
-  padding-bottom: 4px;
-}
-
-.chip {
-  padding: 10px 20px;
-  border-radius: $radius-pill;
-  font-weight: 600;
-  font-size: 14px;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-
-  [data-theme='light'] & {
-    background: #ffffff;
-    color: $text-secondary-light;
-    border: 1px solid $border-light;
-  }
-
-  [data-theme='dark'] & {
-    background: $surface-dark;
-    color: $text-secondary-dark;
-    border: 1px solid $border-dark;
-  }
-
-  &:hover {
-    color: $primary;
-    border-color: $primary;
-  }
-}
-
-.activeChip {
-  background: $primary-gradient !important;
-  color: white !important;
-  border: none !important;
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-}
-
 .gridSection {
   display: flex;
   flex-direction: column;
@@ -140,6 +100,17 @@
   @media (max-width: 600px) {
     grid-template-columns: 1fr;
   }
+}
+
+.productSkeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  border-radius: $radius-lg;
+
+  [data-theme='light'] & { background: rgba($surface-alt-light, 0.6); }
+  [data-theme='dark'] & { background: rgba($surface-alt-dark, 0.4); }
 }
 
 .productCard {
@@ -224,4 +195,13 @@
   &:hover {
     background: rgba($primary, 0.1);
   }
+}
+
+.ratingText {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: $reward-color;
 }

@@ -12,5 +12,9 @@ export const gamificationApi = {
   getRewards: async () => {
     const res = await axiosInstance.get('/rewards');
     return res.data;
+  },
+  redeemReward: async (userId, rewardId) => {
+    const res = await axiosInstance.post('/rewards/redeem', { userId, rewardId });
+    return res.data;
   }
 };

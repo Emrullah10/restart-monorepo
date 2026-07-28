@@ -40,10 +40,28 @@ export const makeMarketplaceRepository = ({ query }) => ({
     );
   },
 
-  findAllListings: async () => {
-    const result = await query(
-      `${LISTING_SELECT_WITH_IMAGES} GROUP BY l.id ORDER BY l.created_at DESC`
-    );
+  findAllListings: async ({ category, q, limit } = {}) => {
+    const conditions = [`l.status = 'active'`];
+    const values = [];
+
+    if (category) {
+      values.push(category);
+      conditions.push(`l.category = $${values.length}`);
+    }
+
+    if (q) {
+      values.push(`%${q}%`);
+      conditions.push(`(l.title ILIKE $${values.length} OR l.description ILIKE $${values.length})`);
+    }
+
+    let sql = `${LISTING_SELECT_WITH_IMAGES} WHERE ${conditions.join(' AND ')} GROUP BY l.id ORDER BY l.created_at DESC`;
+
+    if (limit) {
+      values.push(limit);
+      sql += ` LIMIT $${values.length}`;
+    }
+
+    const result = await query(sql, values);
     return result.rows.map(rowToListing);
   },
 

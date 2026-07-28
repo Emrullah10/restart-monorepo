@@ -1,31 +1,73 @@
 import React from 'react';
-import { Bell, CheckCircle2, Tag, Gift } from 'lucide-react';
+import { CheckCircle2, Tag, Gift, Bell as BellIcon } from 'lucide-react';
 import GlassCard from '@components/GlassCard/GlassCard';
+import { SkeletonCard } from '@components/Skeleton/Skeleton';
+import EmptyState from '@components/EmptyState/EmptyState';
+import { useAuthStore } from '@store/authStore';
+import { useNotifications, useMarkNotificationRead, useMarkAllNotificationsRead } from '@hooks/queries/useNotifications';
+import styles from './NotificationsPage.module.scss';
+
+const ICONS_BY_TYPE = {
+  recycle: CheckCircle2,
+  sell: Tag,
+  reward: Gift
+};
+
+const COLORS_BY_TYPE = {
+  recycle: '#22C55E',
+  sell: '#F59E0B',
+  reward: '#EAB308'
+};
 
 export const NotificationsPage = () => {
-  const notifs = [
-    { id: 1, title: 'Geri Dönüşüm Puanı Eklendi', desc: 'iPhone 11 teslimatınız onaylandı. +150 Çevre Puanı hesabınıza tanımlandı.', time: '10 dakika önce', icon: CheckCircle2, color: '#22C55E' },
-    { id: 2, title: 'Yeni İlan Teklifi', desc: 'iPad Air 5. Nesil ilanınıza ₺15.500 teklif geldi.', time: '2 saat önce', icon: Tag, color: '#F59E0B' },
-    { id: 3, title: 'Haftalık Rozet Kazandın!', desc: 'Bu hafta 2 e-atık teslim ederek "E-Atık Avcısı" rozeti kazandın.', time: '1 gün önce', icon: Gift, color: '#EAB308' }
-  ];
+  const userId = useAuthStore((state) => state.user?.id);
+  const { data: notifications, isLoading } = useNotifications(userId);
+  const markRead = useMarkNotificationRead(userId);
+  const markAllRead = useMarkAllNotificationsRead(userId);
+
+  const list = notifications ?? [];
+  const hasUnread = list.some((n) => !n.isRead);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', maxWidth: '700px', margin: '0 auto' }}>
-      <h1 style={{ fontSize: '28px', fontWeight: '800' }}>Bildirimler</h1>
+    <div className={styles.pageContainer}>
+      <div className={styles.header}>
+        <h1 className={styles.title}>Bildirimler</h1>
+        {hasUnread && (
+          <button className={styles.markAllBtn} onClick={() => markAllRead.mutate()}>
+            Tümünü Okundu İşaretle
+          </button>
+        )}
+      </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-        {notifs.map((n) => {
-          const Icon = n.icon;
+      {isLoading && (
+        <div className={styles.list}>
+          {Array.from({ length: 4 }).map((_, i) => <SkeletonCard key={i} lines={2} />)}
+        </div>
+      )}
+      {!isLoading && list.length === 0 && (
+        <EmptyState icon={BellIcon} title="Henüz bildiriminiz yok" subtitle="Yeni etkinlikler burada görünecek." />
+      )}
+
+      <div className={styles.list}>
+        {list.map((n) => {
+          const Icon = ICONS_BY_TYPE[n.type] ?? BellIcon;
+          const color = COLORS_BY_TYPE[n.type] ?? '#64748B';
           return (
-            <GlassCard key={n.id} style={{ padding: '16px 20px', display: 'flex', gap: '16px', alignItems: 'center' }}>
-              <div style={{ width: '42px', height: '42px', borderRadius: '50%', background: `${n.color}1A`, color: n.color, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <GlassCard
+              key={n.id}
+              className={`${styles.card} ${!n.isRead ? styles.unreadCard : ''}`}
+              hoverEffect={false}
+              onClick={() => !n.isRead && markRead.mutate(n.id)}
+            >
+              <div className={styles.iconCircle} style={{ backgroundColor: `${color}1A`, color }}>
                 <Icon size={20} />
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', flex: 1, gap: '4px' }}>
-                <strong style={{ fontSize: '15px' }}>{n.title}</strong>
-                <p style={{ fontSize: '13px', opacity: 0.8 }}>{n.desc}</p>
-                <span style={{ fontSize: '11px', opacity: 0.5 }}>{n.time}</span>
+              <div className={styles.info}>
+                <strong className={styles.notifTitle}>{n.title}</strong>
+                <p className={styles.notifDesc}>{n.body}</p>
+                <span className={styles.notifTime}>{n.createdAt}</span>
               </div>
+              {!n.isRead && <span className={styles.unreadDot} />}
             </GlassCard>
           );
         })}

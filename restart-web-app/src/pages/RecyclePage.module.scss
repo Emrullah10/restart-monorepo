@@ -173,6 +173,12 @@
   cursor: pointer;
 }
 
+.errorText {
+  font-size: 13px;
+  font-weight: 600;
+  color: $error;
+}
+
 .successCard {
   display: flex;
   flex-direction: column;

@@ -79,15 +79,58 @@
   [data-theme='dark'] & { color: $text-secondary-dark; }
 }
 
-.priceRow {
+.shopsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sectionTitle {
+  font-size: 22px;
+  font-weight: 700;
+
+  [data-theme='light'] & { color: $text-primary-light; }
+  [data-theme='dark'] & { color: $text-primary-dark; }
+}
+
+.shopList {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-top: 8px;
 }
 
-.price {
+.shopCard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.shopName {
   font-size: 16px;
   font-weight: 700;
+
+  [data-theme='light'] & { color: $text-primary-light; }
+  [data-theme='dark'] & { color: $text-primary-dark; }
+}
+
+.shopMeta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 13px;
+  color: $text-secondary-light;
+
+  [data-theme='dark'] & { color: $text-secondary-dark; }
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.shopTags {
+  font-size: 12px;
   color: $primary;
+  font-weight: 600;
 }

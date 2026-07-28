@@ -1,8 +1,10 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import AuthLayout from '@layouts/AuthLayout';
 import MainLayout from '@layouts/MainLayout';
+import PublicLayout from '@layouts/PublicLayout';
 import ProtectedRoute from './ProtectedRoute';
+import { useAuthStore } from '@store/authStore';
 
 import HomePage from '@pages/HomePage';
 import LoginPage from '@pages/LoginPage';
@@ -16,22 +18,63 @@ import ProfilePage from '@pages/ProfilePage';
 import NotificationsPage from '@pages/NotificationsPage';
 import SettingsPage from '@pages/SettingsPage';
 import CreateListingPage from '@pages/CreateListingPage';
+import PublicMarketplacePage from '@pages/PublicMarketplacePage';
 import NotFoundPage from '@pages/NotFoundPage';
+
+const PublicMarketplaceRoute = () => {
+  const user = useAuthStore((state) => state.user);
+  if (user) return <Navigate to="/sell" replace />;
+  return <PublicMarketplacePage />;
+};
+
+// Root '/' is the landing page: signed-out visitors see the marketplace
+// showcase (public layout), signed-in users see their HomePage (main layout).
+const RootRoute = () => {
+  const { user, isInitialized } = useAuthStore();
+
+  if (!isInitialized) {
+    return (
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', background: '#111827' }}>
+        <span style={{ color: '#10B981', fontWeight: '700' }}>ReStart Yükleniyor...</span>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <PublicLayout>
+        <PublicMarketplacePage />
+      </PublicLayout>
+    );
+  }
+
+  return (
+    <MainLayout>
+      <HomePage />
+    </MainLayout>
+  );
+};
 
 export const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<RootRoute />} />
+
         {/* Public Auth Routes */}
         <Route element={<AuthLayout />}>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
         </Route>
 
+        {/* Public Marketplace Showcase (no login required) */}
+        <Route element={<PublicLayout />}>
+          <Route path="/pazar" element={<PublicMarketplaceRoute />} />
+        </Route>
+
         {/* Protected App Routes inside Main Layout */}
         <Route element={<ProtectedRoute />}>
           <Route element={<MainLayout />}>
-            <Route path="/" element={<HomePage />} />
             <Route path="/map" element={<MapPage />} />
             <Route path="/recycle" element={<RecyclePage />} />
             <Route path="/sell" element={<SellPage />} />
