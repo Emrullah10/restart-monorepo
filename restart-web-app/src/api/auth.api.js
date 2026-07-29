@@ -6,7 +6,7 @@ export const authApi = {
     return res.data;
   },
   register: async (email, password, fullName) => {
-    const res = await axiosInstance.post('/auth/register', { email, password, fullName });
+    const res = await axiosInstance.post('/gateway/register', { email, password, fullName });
     return res.data;
   },
   getCurrentUser: async () => {

@@ -10,18 +10,22 @@
     "restart-web-app"
   ],
   "scripts": {
+    "test": "node --test core/*/test/**/*.test.js services/*/test/**/*.test.js packages/modules/*/test/**/*.test.js",
     "dev:web": "npm run dev -w restart-web-app",
     "dev:iam": "npm run dev -w restart-service-iam",
     "dev:operation": "npm run dev -w restart-service-operation",
     "dev:marketplace": "npm run dev -w restart-service-marketplace",
     "dev:gateway": "npm run dev -w restart-web-gateway",
+    "dev:mapi": "npm run dev -w restart-mapi-gateway",
     "start:web": "npm run start -w restart-web-app",
     "start:iam": "npm run start -w restart-service-iam",
     "start:operation": "npm run start -w restart-service-operation",
     "start:marketplace": "npm run start -w restart-service-marketplace",
-    "start:gateway": "npm run start -w restart-web-gateway"
+    "start:gateway": "npm run start -w restart-web-gateway",
+    "start:mapi": "npm run start -w restart-mapi-gateway"
   },
   "devDependencies": {
-    "nodemon": "^3.0.2"
+    "nodemon": "^3.0.2",
+    "supertest": "^7.2.2"
   }
 }

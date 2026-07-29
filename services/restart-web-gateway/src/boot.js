@@ -1,31 +1,29 @@
 import express from 'express';
-import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import { requestLogger, notFoundHandler } from '@restart/middlewares';
-import { buildRouter } from './route.js';
+import { makeBoot, buildRouter, makeGatewayHandlers, strictAuthLimiter } from '@restart/gateway-core';
+import { cookieStrategy } from './auth/cookie-strategy.js';
+import { serviceTargets } from '../configs/app-config.js';
 
 const SERVICE_NAME = 'Web Gateway';
 
-export const boot = () => {
-  const app = express();
-  app.use(cors({ credentials: true, origin: true }));
-  // NOTE: express.json() is intentionally NOT mounted globally here.
-  // Proxied routes (register/user/gamification/rewards/contact/operation/marketplace)
-  // must receive the raw request stream — http-proxy-middleware forwards it
-  // as-is. If the body were parsed here first, the stream would already be
-  // consumed and the proxied request would hang waiting for a body that
-  // never arrives. Only the gateway's own routes (login/logout) that read
-  // req.body directly apply express.json() locally in route.js.
-  app.use(cookieParser());
-  app.use(requestLogger(SERVICE_NAME));
+const ownRoutes = (router) => {
+  const handlers = makeGatewayHandlers({ iamTarget: serviceTargets.iam, authStrategy: cookieStrategy });
 
-  app.use(buildRouter());
-
-  app.get('/', (req, res) => {
-    res.send('ReStart Web Gateway');
-  });
-
-  app.use(notFoundHandler(SERVICE_NAME));
-
-  return app;
+  // Only the gateway's own routes parse the body — proxied routes forward
+  // the raw request stream untouched (see the express.json() note in
+  // @restart/gateway-core's boot.js).
+  router.post('/api/gateway/login', strictAuthLimiter, express.json(), handlers.login);
+  router.post('/api/gateway/register', strictAuthLimiter, express.json(), handlers.register);
+  router.get('/api/gateway/me', handlers.me);
+  router.post('/api/gateway/logout', handlers.logout);
 };
+
+const router = buildRouter({ authStrategy: cookieStrategy, serviceTargets, ownRoutes });
+
+export const boot = makeBoot({
+  serviceName: SERVICE_NAME,
+  banner: 'ReStart Web Gateway',
+  corsOptions: { credentials: true, origin: true },
+  extraMiddleware: [cookieParser()],
+  router,
+});

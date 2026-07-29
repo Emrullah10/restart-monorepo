@@ -3,8 +3,8 @@ import { userToJSON } from '../../domain/entities/user.entity.js';
 export const makeUsersController = ({ registerUser, loginUser, getUserProfile }) => ({
   register: async (req, res) => {
     const { email, password, fullName } = req.body;
-    const user = await registerUser({ email, password, fullName });
-    res.status(201).json({ message: 'User registered successfully', user: userToJSON(user) });
+    const { user, token } = await registerUser({ email, password, fullName });
+    res.status(201).json({ message: 'User registered successfully', token, user: userToJSON(user) });
   },
 
   login: async (req, res) => {

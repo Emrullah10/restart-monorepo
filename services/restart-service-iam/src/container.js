@@ -25,7 +25,7 @@ export const buildContainer = ({ datasourceConfig = makeDatasourceConfig(), tran
 
   const userRepo = makeUserRepository({ query });
 
-  const registerUser = makeRegisterUser({ userRepo });
+  const registerUser = makeRegisterUser({ userRepo, jwtSecret });
   const loginUser = makeLoginUser({ userRepo, jwtSecret });
   const getUserProfile = makeGetUserProfile({ userRepo });
   const getLeaderboard = makeGetLeaderboard({ userRepo });
