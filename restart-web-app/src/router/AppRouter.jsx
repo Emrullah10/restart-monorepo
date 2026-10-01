@@ -34,8 +34,8 @@ const RootRoute = () => {
 
   if (!isInitialized) {
     return (
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', background: '#111827' }}>
-        <span style={{ color: '#10B981', fontWeight: '700' }}>ReStart Yükleniyor...</span>
+      <div className="flex min-h-screen items-center justify-center bg-canvas">
+        <span className="font-label text-label uppercase tracking-widest text-accent">ReStart</span>
       </div>
     );
   }

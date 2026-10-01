@@ -126,17 +126,22 @@ function MobileBottomNav() {
   );
 }
 
+const TITLES = { '/create-listing': 'listing.topTitle', '/recycle': 'recycle.topTitle', '/rewards': 'rewards.topTitle', '/profile': 'nav.profile', '/notifications': null, '/settings': null };
+
 /** Authenticated app shell. Pages render via <Outlet/> (or children for the "/" route). */
 export const MainLayout = ({ children, title }) => {
   const { t } = useTranslation();
   const user = useAuthStore((s) => s.user);
   const { data: profile } = useProfile(user?.id);
   const { level } = computeLevel(profile?.stats?.totalPoints);
+  const { pathname } = useLocation();
+  const titleKey = TITLES[pathname];
+  const heading = title ?? (titleKey ? t(titleKey) : undefined);
   return (
     <div className="min-h-screen bg-canvas text-fg">
       <Sidebar user={user} levelText={t('shell.levelShort', { level })} />
       <main className="flex min-h-screen flex-col md:ml-[240px]">
-        <TopBar title={title} />
+        <TopBar title={heading} />
         <MobileTopBar user={user} />
         <div className="flex-1 pb-[100px] md:pb-0">{children ?? <Outlet />}</div>
       </main>

@@ -1,110 +1,66 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { User, Mail, Lock } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import AuthTextField from '@components/AuthTextField/AuthTextField';
-import GradientButton from '@components/GradientButton/GradientButton';
+import { TextField, PasswordStrength, Icon } from '@components/ui';
 import { authApi } from '@api/auth.api';
 import { useAuthStore } from '@store/authStore';
-import styles from './RegisterForm.module.scss';
 
 export const RegisterForm = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const setUser = useAuthStore((state) => state.setUser);
-
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const setUser = useAuthStore((s) => s.setUser);
+  const [form, setForm] = useState({ fullName: '', email: '', password: '', confirm: '' });
+  const [terms, setTerms] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!fullName || !email || !password || !confirmPassword) {
-      setErrorMsg('Lütfen tüm alanları doldurun.');
-      return;
-    }
-    if (password !== confirmPassword) {
-      setErrorMsg('Şifreler eşleşmiyor.');
-      return;
-    }
-
+    if (!form.fullName || !form.email || !form.password || !form.confirm) { setErrorMsg(t('auth.fillAll')); return; }
+    if (form.password !== form.confirm) { setErrorMsg(t('auth.mismatch')); return; }
+    if (!terms) { setErrorMsg(t('auth.termsRequired')); return; }
     try {
-      setLoading(true);
-      setErrorMsg('');
-      const data = await authApi.register(email, password, fullName);
+      setLoading(true); setErrorMsg('');
+      const data = await authApi.register(form.email, form.password, form.fullName);
       setUser(data.user || data);
       navigate('/');
     } catch (err) {
-      const cleanError = err.response?.data?.error || err.message || 'Kayıt yapılamadı';
-      setErrorMsg(cleanError);
-    } finally {
-      setLoading(false);
-    }
+      setErrorMsg(err.response?.data?.error || err.message || t('auth.registerFailed'));
+    } finally { setLoading(false); }
   };
 
+  const field = { upperLabel: true, labelClass: 'text-fg-2', radius: 'r4', height: 'h-12', ring: 'border' };
   return (
-    <div className={styles.formContainer}>
-      <div className={styles.textHeader}>
-        <h2 className={styles.title}>{t('registerTitle')}</h2>
-        <p className={styles.subtitle}>{t('registerSubtitle')}</p>
-      </div>
-
-      {errorMsg && <div className={styles.errorAlert}>{errorMsg}</div>}
-
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <AuthTextField
-          icon={User}
-          placeholder={t('nameHint')}
-          value={fullName}
-          onChange={(e) => setFullName(e.target.value)}
-        />
-
-        <AuthTextField
-          icon={Mail}
-          type="email"
-          placeholder={t('emailHint')}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-
-        <AuthTextField
-          icon={Lock}
-          isPassword
-          placeholder={t('passwordHint')}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-
-        <AuthTextField
-          icon={Lock}
-          isPassword
-          placeholder={t('passwordConfirmHint')}
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-
-        <GradientButton type="submit" isLoading={loading} fullWidth>
-          {t('registerButton')}
-        </GradientButton>
+    <>
+      <header className="mb-space-10">
+        <h2 className="mb-space-3 font-display-lg text-display-lg-mobile text-fg lg:text-display-lg">{t('auth.registerTitle')}</h2>
+        <p className="font-body-md text-body-md text-fg-2">
+          {t('auth.registerSubtitle')}{' '}
+          <Link to="/login" className="font-semibold text-accent underline decoration-accent/50 underline-offset-4 transition-colors hover:text-accent-hover">{t('auth.loginButton')}</Link>
+        </p>
+      </header>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-space-6" noValidate>
+        <TextField {...field} label={t('auth.fullName')} icon="person" placeholder={t('auth.fullNamePlaceholder')} value={form.fullName} onChange={set('fullName')} />
+        <TextField {...field} label={t('auth.emailAddress')} icon="mail" type="email" autoComplete="email" placeholder={t('auth.emailPlaceholder')} value={form.email} onChange={set('email')} />
+        <div>
+          <TextField {...field} label={t('auth.password')} icon="lock" password autoComplete="new-password" placeholder="••••••••" value={form.password} onChange={set('password')} />
+          <PasswordStrength value={form.password} showHint />
+        </div>
+        <TextField {...field} label={t('auth.passwordConfirm')} icon="lock_reset" password autoComplete="new-password" placeholder="••••••••" value={form.confirm} onChange={set('confirm')} />
+        <div className="mt-space-2 flex items-start gap-space-3">
+          <input id="terms" type="checkbox" checked={terms} onChange={(e) => setTerms(e.target.checked)} className="mt-0.5 h-4 w-4 cursor-pointer rounded-r2 border-line bg-field-canvas accent-[var(--c-accent)]" />
+          <label htmlFor="terms" className="cursor-pointer select-none font-caption text-caption text-fg-3">
+            <span className="text-accent hover:underline">{t('auth.terms')}</span>{t('auth.termsMid')}<span className="text-accent hover:underline">{t('auth.privacy')}</span>{t('auth.termsEnd')}
+          </label>
+        </div>
+        {errorMsg && <p role="alert" className="font-caption text-caption text-danger">{errorMsg}</p>}
+        <button type="submit" disabled={loading} className="group mt-space-6 flex h-12 w-full items-center justify-center gap-space-2 rounded-r4 bg-accent font-label text-label uppercase text-on-accent transition-all hover:bg-accent-hover active:scale-[0.98] disabled:opacity-50">
+          <span>{loading ? t('common.loading') : t('auth.registerButton')}</span>
+          <Icon name="arrow_forward" size={18} className="transition-transform group-hover:translate-x-1" />
+        </button>
       </form>
-
-      <div className={styles.footerLink}>
-        <span>{t('haveAccount')}</span>
-        <Link to="/login" className={styles.linkAccent}>
-          {t('loginButton')}
-        </Link>
-      </div>
-
-      <div className={styles.footerLink}>
-        <Link to="/pazar" className={styles.linkAccent}>
-          Giriş yapmadan pazara göz at
-        </Link>
-      </div>
-    </div>
+    </>
   );
 };
-
 export default RegisterForm;

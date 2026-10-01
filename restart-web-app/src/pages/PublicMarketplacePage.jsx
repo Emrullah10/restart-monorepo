@@ -1,81 +1,75 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ShieldCheck } from 'lucide-react';
-import GlassCard from '@components/GlassCard/GlassCard';
-import GradientButton from '@components/GradientButton/GradientButton';
-import ProductGrid from '@features/marketplace/components/ProductGrid';
-import MarketplaceSearchBar from '@features/marketplace/components/MarketplaceSearchBar';
-import MarketplaceHero from '@features/marketplace/components/MarketplaceHero';
-import CategoryStrip from '@features/marketplace/components/CategoryStrip';
-import FeaturedCarousel from '@features/marketplace/components/FeaturedCarousel';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { Icon, Skeleton, EmptyState, cx } from '@components/ui';
+import { PublicProductCard } from '@features/marketplace/ProductCard';
+import { MARKETPLACE_CATEGORIES } from '@features/marketplace/constants';
 import { useProducts } from '@hooks/queries/useMarketplace';
 import { useDebouncedValue } from '@hooks/useDebouncedValue';
-import styles from './PublicMarketplacePage.module.scss';
+import { formatNumber } from '@shared/format';
+import { PLATFORM_STATS } from '@shared/config';
 
 export const PublicMarketplacePage = () => {
-  const navigate = useNavigate();
-  const [activeCategory, setActiveCategory] = useState('all');
-  const [searchValue, setSearchValue] = useState('');
-  const debouncedSearch = useDebouncedValue(searchValue, 300);
-
-  const category = activeCategory === 'all' ? undefined : activeCategory;
-  const { data: featured, isLoading: featuredLoading } = useProducts({ limit: 8 });
-  const { data: products, isLoading } = useProducts({ category, q: debouncedSearch || undefined });
+  const { t } = useTranslation();
+  const [active, setActive] = useState('all');
+  const [q, setQ] = useState('');
+  const debounced = useDebouncedValue(q, 300);
+  const { data: products, isLoading } = useProducts({ category: active === 'all' ? undefined : active, q: debounced || undefined });
+  const list = products ?? [];
 
   return (
-    <div className={styles.container}>
-      <MarketplaceSearchBar
-        searchValue={searchValue}
-        onSearchChange={setSearchValue}
-        activeCategory={activeCategory}
-        onCategoryChange={setActiveCategory}
-      />
-
-      <MarketplaceHero
-        title="E-atığını değere dönüştür"
-        subtitle="Kullanmadığın telefon, laptop ve tabletleri ReStart pazarında saniyeler içinde satışa çıkar. Ücretsiz hesap oluşturman yeterli."
-        ctaLabel="Hemen İlan Ver"
-        onCtaClick={() => navigate('/register')}
-      />
-
-      <CategoryStrip activeCategory={activeCategory} onCategoryChange={setActiveCategory} />
-
-      <FeaturedCarousel products={featured} isLoading={featuredLoading} />
-
-      <GlassCard className={styles.bannerCard} hoverEffect={false}>
-        <div className={styles.bannerContent}>
-          <div className={styles.bannerIcon}>
-            <ShieldCheck size={32} />
+    <>
+      <div className="mx-auto flex w-full max-w-[1180px] grow flex-col gap-space-12 px-space-5 py-space-12 md:px-space-6">
+        <section className="mx-auto flex max-w-3xl flex-col items-center gap-space-6 text-center">
+          <h1 className="font-display-lg-mobile text-display-lg-mobile leading-tight tracking-tight text-fg md:font-display-lg md:text-display-lg">{t('market.heroTitle')}</h1>
+          <p className="font-heading-md text-heading-md text-fg-3">{t('market.heroSub')}</p>
+          <div className="mt-space-4 flex w-full max-w-2xl flex-col items-center gap-space-2">
+            <div className="relative flex h-[52px] w-full">
+              <Icon name="search" className="pointer-events-none absolute inset-y-0 left-space-4 my-auto text-fg-3" />
+              <input value={q} onChange={(e) => setQ(e.target.value)} placeholder={t('market.searchPlaceholder')} className="h-full w-full rounded-l-r6 border border-line bg-field-canvas pl-12 pr-4 font-body-md text-body-md text-fg placeholder:text-fg-3 transition-all focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent" />
+              <button type="button" className="flex h-full items-center justify-center rounded-r-r6 bg-accent px-space-6 font-label text-label text-on-accent transition-colors hover:bg-accent-hover">{t('market.searchButton')}</button>
+            </div>
+            <div className="mt-space-2 flex items-center gap-space-2 font-caption text-caption text-fg-3">
+              <Icon name="query_stats" size={14} />
+              <span>{t('market.stats', { listings: formatNumber(list.length), kg: formatNumber(PLATFORM_STATS.recycledKg) })}</span>
+            </div>
           </div>
-          <div>
-            <h3 className={styles.bannerTitle}>Güvenli İkinci El Satış</h3>
-            <p className={styles.bannerSub}>ReStart güvencesiyle kullanmadığın cihazları kolayca sat.</p>
-          </div>
-        </div>
-      </GlassCard>
+        </section>
 
-      <div className={styles.gridSection}>
-        <h2 className={styles.sectionTitle}>Tüm İlanlar</h2>
-        <ProductGrid
-          products={products}
-          isLoading={isLoading}
-          emptyTitle="Henüz ilan yok"
-          emptySubtitle="Bu kategoride ilk ilanı sen ver — ücretsiz hesap oluşturman yeterli."
-        />
+        <section className="relative w-full">
+          <div className="no-scrollbar flex gap-space-3 overflow-x-auto border-b border-line pb-space-2">
+            {MARKETPLACE_CATEGORIES.map((c) => (
+              <button key={c} type="button" onClick={() => setActive(c)} className={cx('whitespace-nowrap rounded-r2 px-space-5 py-space-2 font-label text-label transition-colors', active === c ? 'border-2 border-accent bg-accent-subtle text-accent' : 'border border-line bg-surface text-fg-2 hover:bg-field')}>
+                {t(`market.categories.${c}`)}
+              </button>
+            ))}
+          </div>
+        </section>
+
+        {isLoading ? (
+          <section className="grid grid-cols-1 gap-space-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">{Array.from({ length: 4 }).map((_, i) => <Skeleton key={i} className="h-72" />)}</section>
+        ) : list.length === 0 ? (
+          <EmptyState title={t('market.emptyTitle')} subtitle={t('market.emptyPublic')} />
+        ) : (
+          <section className="grid grid-cols-1 gap-space-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {list.map((p) => <PublicProductCard key={p.id} product={p} />)}
+          </section>
+        )}
       </div>
 
-      <GlassCard className={styles.ctaCard} hoverEffect={false}>
-        <div>
-          <h3 className={styles.ctaTitle}>İlan vermek veya ilanlarını yönetmek ister misin?</h3>
-          <p className={styles.ctaSub}>Ücretsiz hesap oluştur, cihazlarını saniyeler içinde satışa çıkar.</p>
+      <section className="mt-space-12 w-full border-t border-brand-line bg-brand-900">
+        <div className="mx-auto flex max-w-[1180px] flex-col items-center justify-between gap-space-8 px-space-6 py-space-16 md:flex-row">
+          <div className="flex max-w-xl flex-col gap-space-4">
+            <h2 className="font-display-lg-mobile text-display-lg-mobile tracking-tight text-on-brand md:font-display-lg md:text-display-lg">{t('market.ctaTitle')}</h2>
+            <p className="font-body-md text-body-md text-brand-400">{t('market.ctaBody')}</p>
+          </div>
+          <Link to="/register" className="group flex shrink-0 items-center gap-space-2 rounded-r2 border border-transparent bg-brand-600 px-space-8 py-space-4 font-label text-label text-on-brand transition-colors hover:border-on-brand hover:bg-brand-400">
+            {t('auth.registerLink')}
+            <Icon name="arrow_right_alt" size={18} className="transition-transform group-hover:translate-x-1" />
+          </Link>
         </div>
-        <div className={styles.ctaActions}>
-          <button className={styles.loginLink} onClick={() => navigate('/login')}>Giriş Yap</button>
-          <GradientButton onClick={() => navigate('/register')}>Kayıt Ol</GradientButton>
-        </div>
-      </GlassCard>
-    </div>
+      </section>
+    </>
   );
 };
-
 export default PublicMarketplacePage;

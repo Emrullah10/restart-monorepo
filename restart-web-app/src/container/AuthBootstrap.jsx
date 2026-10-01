@@ -15,7 +15,7 @@ export const AuthBootstrap = ({ children }) => {
       try {
         const user = await authApi.getCurrentUser();
         setUser(user);
-      } catch (err) {
+      } catch {
         setUser(null);
       }
     };

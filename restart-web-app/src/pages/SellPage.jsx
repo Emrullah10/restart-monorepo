@@ -1,103 +1,91 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Plus, ShieldCheck } from 'lucide-react';
+import { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import GlassCard from '@components/GlassCard/GlassCard';
-import GradientButton from '@components/GradientButton/GradientButton';
-import ProductGrid from '@features/marketplace/components/ProductGrid';
-import MarketplaceSearchBar from '@features/marketplace/components/MarketplaceSearchBar';
+import { Icon, Button, Skeleton, EmptyState, cx } from '@components/ui';
+import { MarketCard, ListingCard } from '@features/marketplace/ProductCard';
+import { MARKETPLACE_CATEGORIES } from '@features/marketplace/constants';
 import { useAuthStore } from '@store/authStore';
 import { useProducts, useUserListings } from '@hooks/queries/useMarketplace';
 import { useDebouncedValue } from '@hooks/useDebouncedValue';
-import { resolveImageUrl } from '@shared/utils/resolveImageUrl';
-import styles from './SellPage.module.scss';
 
 export const SellPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [activeCategory, setActiveCategory] = useState('all');
-  const [searchValue, setSearchValue] = useState('');
-  const debouncedSearch = useDebouncedValue(searchValue, 300);
-  const userId = useAuthStore((state) => state.user?.id);
+  const userId = useAuthStore((s) => s.user?.id);
+  const [active, setActive] = useState('all');
+  const [q, setQ] = useState('');
+  const [sort, setSort] = useState('new');
+  const debounced = useDebouncedValue(q, 300);
+  const { data: products, isLoading } = useProducts({ category: active === 'all' ? undefined : active, q: debounced || undefined });
+  const { data: mine } = useUserListings(userId);
 
-  const category = activeCategory === 'all' ? undefined : activeCategory;
-  const { data: products, isLoading } = useProducts({ category, q: debouncedSearch || undefined });
-  const { data: myListings } = useUserListings(userId);
-  const filtered = products ?? [];
+  const sorted = [...(products ?? [])].sort((a, b) => (sort === 'asc' ? a.price - b.price : sort === 'desc' ? b.price - a.price : new Date(b.createdAt) - new Date(a.createdAt)));
 
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>
-        <div>
-          <h1 className={styles.title}>{t('navSell')} & İkinci El Pazarı</h1>
-          <p className={styles.subtitle}>Kullanmadığın cihazları güvenle nakde çevir ya da yenilenmiş cihazlar satın al</p>
-        </div>
-
-        <GradientButton onClick={() => navigate('/create-listing')}>
-          <Plus size={18} /> {t('createListingButton')}
-        </GradientButton>
-      </div>
-
-      {/* Safe Selling Banner */}
-      <GlassCard className={styles.bannerCard} hoverEffect={false}>
-        <div className={styles.bannerContent}>
-          <div className={styles.bannerIcon}>
-            <ShieldCheck size={32} />
-          </div>
+    <div className="bg-canvas p-space-6 md:p-space-10">
+      <div className="mx-auto flex max-w-[1180px] flex-col gap-space-10">
+        <div className="flex flex-col items-start justify-between gap-space-4 md:flex-row md:items-end">
           <div>
-            <h3 className={styles.bannerTitle}>{t('safeSellingTitle')}</h3>
-            <p className={styles.bannerSub}>{t('safeSellingSub')}</p>
+            <h2 className="font-display-lg text-display-lg text-fg">{t('market.title')}</h2>
+            <p className="mt-2 max-w-2xl font-body-md text-body-md text-fg-2">{t('market.subtitle')}</p>
+          </div>
+          <Button icon="add" radius="r4" className="px-space-6 py-space-3" onClick={() => navigate('/create-listing')}>{t('market.createListing')}</Button>
+        </div>
+
+        <div className="flex items-start gap-space-4 rounded-r8 border border-l-[3px] border-line border-l-accent bg-muted p-space-6">
+          <Icon name="shield" size={32} fill={1} className="mt-1 text-accent" />
+          <div>
+            <h3 className="mb-1 font-heading-md text-heading-md text-fg">{t('market.guaranteeTitle')}</h3>
+            <p className="font-body-md text-body-md text-fg-2">{t('market.guaranteeBody')}</p>
           </div>
         </div>
-      </GlassCard>
 
-      {/* Search + Category Nav */}
-      <MarketplaceSearchBar
-        searchValue={searchValue}
-        onSearchChange={setSearchValue}
-        activeCategory={activeCategory}
-        onCategoryChange={setActiveCategory}
-      />
-
-      {/* My Listings */}
-      {myListings && myListings.length > 0 && (
-        <div className={styles.gridSection}>
-          <h2 className={styles.sectionTitle}>{t('activeListings')}</h2>
-          <div className={styles.productsGrid}>
-            {myListings.map((listing) => (
-              <GlassCard key={listing.id} className={styles.productCard}>
-                <div className={styles.imageBox}>
-                  <img
-                    src={resolveImageUrl(listing.images?.[0] ?? listing.imageUrl) ?? '/placeholder-product.svg'}
-                    alt={listing.title}
-                  />
-                  <span className={styles.statusBadge}>{listing.status}</span>
-                </div>
-                <div className={styles.productDetails}>
-                  <h3 className={styles.prodTitle}>{listing.title}</h3>
-                  {listing.description && <span className={styles.sellerText}>{listing.description}</span>}
-                  <div className={styles.priceRow}>
-                    <span className={styles.price}>₺{listing.price}</span>
-                  </div>
-                </div>
-              </GlassCard>
+        <div className="flex flex-col gap-space-4">
+          <div className="relative w-full">
+            <Icon name="search" className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-fg-2" />
+            <input value={q} onChange={(e) => setQ(e.target.value)} placeholder={t('market.listingSearch')} className="h-[44px] w-full rounded-r4 border border-line bg-field-canvas pl-12 pr-4 font-body-md text-body-md text-fg placeholder:text-fg-3 transition-all focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-canvas" />
+          </div>
+          <div className="flex flex-wrap gap-space-2">
+            {MARKETPLACE_CATEGORIES.map((c) => (
+              <button key={c} type="button" onClick={() => setActive(c)} className={cx('rounded-r4 px-space-4 py-space-2 font-label text-label transition-colors', active === c ? 'border border-accent bg-accent-subtle text-on-accent-subtle' : 'border border-line bg-surface text-fg-2 hover:bg-muted')}>{t(`market.categories.${c}`)}</button>
             ))}
           </div>
         </div>
-      )}
 
-      {/* Products Grid */}
-      <div className={styles.gridSection}>
-        <h2 className={styles.sectionTitle}>{t('marketplaceTitle')}</h2>
-        <ProductGrid
-          products={filtered}
-          isLoading={isLoading}
-          emptyTitle="Bu kategoride ürün bulunamadı"
-          emptySubtitle="Farklı bir kategori seçmeyi deneyin."
-        />
+        {mine && mine.length > 0 && (
+          <section>
+            <div className="mb-space-6 flex items-end justify-between border-b border-line pb-space-2">
+              <h3 className="font-heading-md text-heading-md text-fg">{t('market.myListings')}</h3>
+              <Link to="/sell" className="font-label text-label text-accent hover:underline">{t('market.seeAll')}</Link>
+            </div>
+            <div className="grid grid-cols-1 gap-space-4 md:grid-cols-3">
+              {mine.map((l) => <ListingCard key={l.id} listing={l} labels={{ active: t('market.statusActive'), sold: t('market.statusSold') }} />)}
+            </div>
+          </section>
+        )}
+
+        <section>
+          <div className="mb-space-6 flex items-end justify-between border-b border-line pb-space-2">
+            <h3 className="font-heading-md text-heading-md text-fg">{t('market.allListings')}</h3>
+            <div className="flex items-center gap-2">
+              <span className="font-label text-label text-fg-2">{t('market.sortBy')}</span>
+              <select value={sort} onChange={(e) => setSort(e.target.value)} className="cursor-pointer border-none bg-transparent font-label text-label text-fg focus:outline-none">
+                <option value="new">{t('market.sortNew')}</option>
+                <option value="asc">{t('market.sortAsc')}</option>
+                <option value="desc">{t('market.sortDesc')}</option>
+              </select>
+            </div>
+          </div>
+          {isLoading ? (
+            <div className="grid grid-cols-1 gap-space-4 sm:grid-cols-2 lg:grid-cols-4">{Array.from({ length: 4 }).map((_, i) => <Skeleton key={i} className="h-64" />)}</div>
+          ) : sorted.length === 0 ? (
+            <EmptyState title={t('market.emptyTitle')} subtitle={t('market.emptyApp')} />
+          ) : (
+            <div className="grid grid-cols-1 gap-space-4 sm:grid-cols-2 lg:grid-cols-4">{sorted.map((p) => <MarketCard key={p.id} product={p} />)}</div>
+          )}
+        </section>
       </div>
     </div>
   );
 };
-
 export default SellPage;

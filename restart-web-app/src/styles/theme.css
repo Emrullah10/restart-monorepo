@@ -105,3 +105,14 @@
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
 @media (prefers-reduced-motion: reduce) { *, ::before, ::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; } }
+
+/* Map pins (Leaflet divIcon) — teardrop rotated -45deg, icon counter-rotated. */
+.rs-pin { display:flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:12px 12px 2px 12px; transform:rotate(-45deg); box-shadow:0 1px 2px rgba(0,0,0,.05); transition:transform .15s; }
+.rs-pin .material-symbols-outlined { transform:rotate(45deg); color:#fff; font-size:16px; }
+.rs-pin:hover { transform:rotate(-45deg) scale(1.1); }
+.rs-pin--repair { background:#2C5F7A; } .rs-pin--recycle { background:var(--c-accent); } .rs-pin--sell { background:#9A6B1F; }
+[data-theme="dark"] .rs-pin--sell { background:#DDA87C; }
+.leaflet-container { font-family: var(--font-body-md); background: var(--c-map-bg); }
+.leaflet-container .leaflet-tile-pane { opacity:.8; }
+[data-theme="dark"] .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(.75) contrast(.9) saturate(.5); }
+.rs-map-dots { background-color: var(--c-map-bg); background-image: radial-gradient(var(--c-map-dot) 1px, transparent 1px); background-size: 20px 20px; }
