@@ -1,0 +1,177 @@
+// ReStart Design Tokens — "Ciddi Doğa" (docs/design/DESIGN_SYSTEM.md)
+// CSS custom properties so theme resolution happens in one place,
+// not via [data-theme] branching in every component.
+
+:root {
+  // Raw ramp — Patina Green (brand)
+  --patina-50: #F0F5F2;
+  --patina-100: #DCE9E2;
+  --patina-200: #B9D3C6;
+  --patina-300: #8DB8A5;
+  --patina-400: #5F9A83;
+  --patina-500: #3F7D66;
+  --patina-600: #2E6952;
+  --patina-700: #245442;
+  --patina-800: #1B4033;
+  --patina-900: #132E25;
+
+  // Raw ramp — Oxidized Copper (secondary)
+  --copper-100: #F5E7DC;
+  --copper-300: #DDA87C;
+  --copper-500: #B5642F;
+  --copper-700: #8A4A21;
+
+  // Raw ramp — Paper & Ink (neutrals)
+  --paper-0: #FDFDFB;
+  --paper-50: #F7F7F3;
+  --paper-100: #EFEFE9;
+  --paper-200: #E2E3DC;
+  --paper-300: #C9CBC3;
+  --ink-400: #8A9490;
+  --ink-500: #6B7671;
+  --ink-600: #4A5450;
+  --ink-700: #2F3936;
+  --ink-800: #1E2724;
+  --ink-900: #141C1A;
+  --ink-950: #0D1412;
+
+  // Dark-theme-only surfaces
+  --dark-surface-1: #1A2422;
+  --dark-surface-2: #212D2A;
+  --dark-surface-3: #293733;
+  --dark-border: #33403C;
+  --dark-text-1: #E8EDEA;
+  --dark-text-2: #A9B5B0;
+  --dark-text-3: #7C8884;
+
+  // Status colors (light)
+  --success: #2E6952;
+  --warning: #9A6B1F;
+  --danger: #A63A32;
+  --info: #2C5F7A;
+  --success-bg: #E8F1EC;
+  --warning-bg: #F7EFDF;
+  --danger-bg: #F8E9E7;
+  --info-bg: #E6EFF3;
+
+  // Module colors (light)
+  --module-repair: #2C5F7A;
+  --module-sell: #9A6B1F;
+  --module-recycle: #2E6952;
+  --module-reward: #7A5C2E;
+  --module-repair-bg: #E6EFF3;
+  --module-sell-bg: #F7EFDF;
+  --module-recycle-bg: #E8F1EC;
+  --module-reward-bg: #F5EFE2;
+
+  // Device category colors (light)
+  --device-phone: #2C5F7A;
+  --device-laptop: #5A4A7A;
+  --device-tablet: #2E6952;
+  --device-other: #7A5C2E;
+
+  // Semantic — light theme (default)
+  --bg-canvas: var(--paper-50);
+  --bg-surface: var(--paper-0);
+  --bg-surface-raised: var(--paper-0);
+  --bg-surface-sunken: var(--paper-100);
+  --bg-accent-subtle: var(--patina-50);
+  --fg-primary: var(--ink-800);
+  --fg-body: var(--ink-700);
+  --fg-secondary: var(--ink-400);
+  --fg-on-accent: #FFFFFF;
+  --icon-default: var(--ink-600);
+  --icon-accent: var(--patina-600);
+  --border-default: var(--paper-200);
+  --border-strong: var(--paper-300);
+  --border-accent: var(--patina-600);
+  --accent: var(--patina-600);
+  --accent-hover: var(--patina-700);
+  --accent-pressed: var(--patina-800);
+  --accent-2: var(--copper-500);
+
+  // Spacing (4px base)
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  // Radius
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  // Shadow (light)
+  --shadow-none: none;
+  --shadow-sm: 0 1px 2px rgba(20, 28, 26, 0.05);
+  --shadow-md: 0 2px 8px rgba(20, 28, 26, 0.07), 0 1px 2px rgba(20, 28, 26, 0.04);
+  --shadow-lg: 0 8px 24px rgba(20, 28, 26, 0.10), 0 2px 6px rgba(20, 28, 26, 0.05);
+
+  // Motion
+  --motion-instant: 100ms cubic-bezier(0.4, 0, 1, 1);
+  --motion-fast: 160ms cubic-bezier(0.2, 0, 0.2, 1);
+  --motion-base: 240ms cubic-bezier(0.2, 0, 0.2, 1);
+  --motion-slow: 360ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  // Typography
+  --font-display: 'Inter Tight', 'Inter', -apple-system, sans-serif;
+  --font-body: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+}
+
+body[data-theme='dark'] {
+  --success: #5F9A83;
+  --warning: #D4A24E;
+  --danger: #D97B72;
+  --info: #6FA3BE;
+  --success-bg: #1A2E26;
+  --warning-bg: #2E2718;
+  --danger-bg: #2E1D1B;
+  --info-bg: #18272E;
+
+  --module-repair: #6FA3BE;
+  --module-sell: #D4A24E;
+  --module-recycle: #5F9A83;
+  --module-reward: #C4A265;
+  --module-repair-bg: #18272E;
+  --module-sell-bg: #2E2718;
+  --module-recycle-bg: #1A2E26;
+  --module-reward-bg: #2B2519;
+
+  --device-phone: #6FA3BE;
+  --device-laptop: #A294C4;
+  --device-tablet: #5F9A83;
+  --device-other: #C4A265;
+
+  --bg-canvas: var(--ink-900);
+  --bg-surface: var(--dark-surface-1);
+  --bg-surface-raised: var(--dark-surface-2);
+  --bg-surface-sunken: var(--dark-surface-3);
+  --bg-accent-subtle: var(--patina-900);
+  --fg-primary: var(--dark-text-1);
+  --fg-body: var(--dark-text-2);
+  --fg-secondary: var(--dark-text-3);
+  --fg-on-accent: #0D1412;
+  --icon-default: var(--dark-text-2);
+  --icon-accent: var(--patina-400);
+  --border-default: var(--dark-border);
+  --border-strong: #3E4C47;
+  --border-accent: var(--patina-400);
+  --accent: var(--patina-400);
+  --accent-hover: var(--patina-300);
+  --accent-pressed: var(--patina-500);
+  --accent-2: var(--copper-300);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
