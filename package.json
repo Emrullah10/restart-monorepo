@@ -19,6 +19,8 @@
     "dev:mapi": "npm run dev -w restart-mapi-gateway",
     "build:web": "npm run build -w restart-web-app",
     "migrate": "node db-schemas/migrate.mjs",
+    "seed": "node db-schemas/seed-random-demo.mjs",
+    "seed:rich": "node db-schemas/seed-rich-demo.mjs",
     "start:web": "npm run start -w restart-web-app",
     "start:iam": "npm run start -w restart-service-iam",
     "start:operation": "npm run start -w restart-service-operation",
