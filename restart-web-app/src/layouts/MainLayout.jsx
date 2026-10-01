@@ -1,186 +1,146 @@
-import React from 'react';
-import { Outlet, NavLink, useNavigate, useLocation } from 'react-router-dom';
-import {
-  Home,
-  MapPin,
-  Recycle,
-  Tag,
-  Award,
-  Wrench,
-  User,
-  Bell,
-  Settings,
-  LogOut,
-  Plus
-} from 'lucide-react';
-import { useAuthStore } from '@store/authStore';
-import { authApi } from '@api/auth.api';
-import { useNotifications } from '@hooks/queries/useNotifications';
-import ThemeToggle from '@components/ThemeToggle/ThemeToggle';
-import LanguageToggle from '@components/LanguageToggle/LanguageToggle';
+import { Outlet, NavLink, Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import styles from './MainLayout.module.scss';
+import { Icon, Avatar, cx } from '@components/ui';
+import { useAuthStore } from '@store/authStore';
+import { useThemeStore } from '@store/themeStore';
+import { useProfile } from '@hooks/queries/useProfile';
+import { computeLevel } from '@shared/level';
+import { shortName } from '@shared/format';
 
-export const MainLayout = ({ children }) => {
+// Sidebar order (web) and bottom-nav order (mobile web, same as the Flutter app).
+const SIDE_NAV = [
+  { to: '/', icon: 'home', label: 'nav.home', end: true },
+  { to: '/map', icon: 'map', label: 'nav.map' },
+  { to: '/recycle', icon: 'recycling', label: 'nav.recycle' },
+  { to: '/sell', icon: 'sell', label: 'nav.sell', also: ['/create-listing'] },
+  { to: '/rewards', icon: 'workspace_premium', label: 'nav.rewards' },
+  { to: '/repair', icon: 'build', label: 'nav.repair' },
+];
+const BOTTOM_NAV = [
+  { to: '/map', icon: 'map', label: 'nav.map' },
+  { to: '/recycle', icon: 'recycling', label: 'nav.recycleShort' },
+  { to: '/', icon: 'home', label: 'nav.home', end: true },
+  { to: '/sell', icon: 'sell', label: 'nav.sell', also: ['/create-listing'] },
+  { to: '/rewards', icon: 'workspace_premium', label: 'nav.rewards' },
+];
+
+const useActive = (item) => {
+  const { pathname } = useLocation();
+  if (item.end) return pathname === item.to;
+  return [item.to, ...(item.also ?? [])].some((p) => pathname === p || pathname.startsWith(`${p}/`));
+};
+
+function SideItem({ item }) {
   const { t } = useTranslation();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const user = useAuthStore((state) => state.user);
-  const logout = useAuthStore((state) => state.logout);
-  const { data: notifications } = useNotifications(user?.id);
-  const hasUnreadNotifications = (notifications ?? []).some((n) => !n.isRead);
-
-  const handleLogout = async () => {
-    try {
-      await authApi.logout();
-    } catch (_) {}
-    logout();
-    navigate('/login');
-  };
-
-  const navItems = [
-    { path: '/', label: t('navHome'), icon: Home },
-    { path: '/map', label: t('navMap'), icon: MapPin },
-    { path: '/recycle', label: t('navRecycle'), icon: Recycle },
-    { path: '/sell', label: t('navSell'), icon: Tag },
-    { path: '/rewards', label: t('navRewards'), icon: Award },
-    { path: '/repair', label: t('navRepair'), icon: Wrench }
-  ];
-
+  const active = useActive(item);
   return (
-    <div className={styles.layoutContainer}>
-      {/* Desktop Sidebar */}
-      <aside className={styles.sidebar}>
-        <div className={styles.sidebarHeader}>
-          <div className={styles.logoBadge}>
-            <Recycle size={24} />
-          </div>
-          <span className={styles.logoText}>ReStart</span>
-        </div>
+    <NavLink
+      to={item.to}
+      className={cx(
+        'flex items-center gap-space-3 border-l-[3px] px-space-4 py-space-3 font-label text-label transition-colors',
+        active ? 'border-accent bg-muted font-bold text-accent' : 'border-transparent text-fg-2 hover:bg-hover',
+      )}
+    >
+      <Icon name={item.icon} fill={active ? 1 : 0} weight={active ? 700 : 400} />
+      <span>{t(item.label)}</span>
+    </NavLink>
+  );
+}
 
-        <nav className={styles.navMenu}>
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            return (
-              <NavLink
-                key={item.path}
-                to={item.path}
-                className={({ isActive }) =>
-                  `${styles.navItem} ${isActive ? styles.activeNavItem : ''}`
-                }
-              >
-                <Icon size={20} />
-                <span>{item.label}</span>
-              </NavLink>
-            );
-          })}
-        </nav>
-
-        <div className={styles.sidebarFooter}>
-          <NavLink
-            to="/profile"
-            className={({ isActive }) =>
-              `${styles.profileLink} ${isActive ? styles.activeProfile : ''}`
-            }
-          >
-            <div className={styles.avatar}>
-              <img
-                src={
-                  user?.avatarUrl ||
-                  'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80'
-                }
-                alt="Profile"
-              />
-            </div>
-            <div className={styles.userInfo}>
-              <span className={styles.userName}>{user?.fullName || 'Kullanıcı'}</span>
-              <span className={styles.userRole}>Eco Member</span>
-            </div>
-          </NavLink>
-
-          <button onClick={handleLogout} className={styles.logoutBtn} title={t('navLogout')}>
-            <LogOut size={18} />
-          </button>
-        </div>
-      </aside>
-
-      {/* Main Content Area */}
-      <div className={styles.mainWrapper}>
-        {/* Top Header */}
-        <header className={styles.topHeader}>
-          <div className={styles.headerTitleArea}>
-            <span className={styles.greeting}>Merhaba, {user?.fullName || 'Hoş geldiniz'} 👋</span>
-          </div>
-
-          <div className={styles.headerActions}>
-            <button
-              onClick={() => navigate('/create-listing')}
-              className={styles.createListingBtn}
-            >
-              <Plus size={18} />
-              <span>İlan Ver</span>
-            </button>
-
-            <button
-              onClick={() => navigate('/notifications')}
-              className={styles.iconBtn}
-              title={t('navNotifications')}
-            >
-              <Bell size={20} />
-              {hasUnreadNotifications && <span className={styles.notificationDot} />}
-            </button>
-
-            <button
-              onClick={() => navigate('/settings')}
-              className={styles.iconBtn}
-              title={t('navSettings')}
-            >
-              <Settings size={20} />
-            </button>
-
-            <ThemeToggle />
-            <LanguageToggle />
-          </div>
-        </header>
-
-        {/* Page Content */}
-        <main className={styles.pageContent} key={location.pathname}>
-          {children ?? <Outlet />}
-        </main>
-
-        {/* Mobile Floating Action Button (Only on Home Route) */}
-        {location.pathname === '/' && (
-          <button
-            onClick={() => navigate('/create-listing')}
-            className={styles.mobileFab}
-            aria-label="Create Listing"
-          >
-            <Plus size={26} />
-          </button>
-        )}
-
-        {/* Mobile Glassmorphism Bottom Navigation */}
-        <nav className={styles.bottomNav}>
-          <div className={styles.bottomNavGlass}>
-            {navItems.slice(0, 5).map((item) => {
-              const Icon = item.icon;
-              const isActive = location.pathname === item.path;
-              return (
-                <NavLink
-                  key={item.path}
-                  to={item.path}
-                  className={`${styles.bottomNavItem} ${isActive ? styles.bottomNavActive : ''}`}
-                >
-                  <div className={styles.bottomIconWrapper}>
-                    <Icon size={22} />
-                  </div>
-                  {isActive && <span className={styles.bottomLabel}>{item.label}</span>}
-                </NavLink>
-              );
-            })}
-          </div>
-        </nav>
+function Sidebar({ user, levelText }) {
+  const { t } = useTranslation();
+  const { pathname } = useLocation();
+  const onProfile = pathname.startsWith('/profile');
+  return (
+    <nav className="fixed left-0 top-0 z-40 hidden h-screen w-[240px] flex-col border-r border-line bg-surface md:flex">
+      <div className="flex flex-col gap-space-1 border-b border-line px-6 py-8">
+        <h1 className="font-display-lg text-heading-lg tracking-tight text-accent">{t('brand.name')}</h1>
+        <span className="font-label text-label uppercase text-fg-2">{t('brand.tagline')}</span>
       </div>
+      <div className="flex flex-1 flex-col overflow-y-auto py-4">
+        {SIDE_NAV.map((item) => <SideItem key={item.to} item={item} />)}
+      </div>
+      <Link
+        to="/profile"
+        className={cx('flex items-center gap-space-3 border-l-[3px] border-t border-t-line p-6 transition-colors', onProfile ? 'border-l-accent bg-muted' : 'border-l-transparent hover:bg-hover')}
+      >
+        <Avatar name={user?.fullName} src={user?.avatarUrl} size={32} />
+        <div className="flex min-w-0 flex-col">
+          <span className="truncate font-label text-label text-fg">{shortName(user?.fullName) || t('shell.user')}</span>
+          <span className="truncate font-caption text-caption text-fg-2">{levelText}</span>
+        </div>
+      </Link>
+    </nav>
+  );
+}
+
+function TopBar({ title }) {
+  const { t, i18n } = useTranslation();
+  const toggleTheme = useThemeStore((s) => s.toggleTheme);
+  const btn = 'p-1 text-fg-2 transition-colors hover:text-accent';
+  return (
+    <header className="sticky top-0 z-30 hidden h-[73px] items-center justify-between border-b border-line bg-surface px-6 md:flex">
+      <div>{title && <h2 className="font-heading-md text-heading-md text-fg">{title}</h2>}</div>
+      <div className="flex items-center gap-space-4">
+        <Link to="/notifications" aria-label={t('nav.notifications')} className={btn}><Icon name="notifications" /></Link>
+        <Link to="/settings" aria-label={t('nav.settings')} className={btn}><Icon name="settings" /></Link>
+        <button type="button" aria-label={t('shell.language')} className={btn} onClick={() => i18n.changeLanguage(i18n.language === 'tr' ? 'en' : 'tr')}><Icon name="language" /></button>
+        <button type="button" aria-label={t('shell.theme')} className={btn} onClick={toggleTheme}><Icon name="contrast" /></button>
+      </div>
+    </header>
+  );
+}
+
+function MobileTopBar({ user }) {
+  const { t } = useTranslation();
+  return (
+    <header className="sticky top-0 z-30 flex items-center justify-between border-b border-line bg-surface px-6 py-4 md:hidden">
+      <h1 className="font-heading-lg text-heading-lg text-accent">{t('brand.name')}</h1>
+      <Link to="/profile" aria-label={t('nav.profile')}><Avatar name={user?.fullName} src={user?.avatarUrl} size={32} /></Link>
+    </header>
+  );
+}
+
+function BottomItem({ item }) {
+  const { t } = useTranslation();
+  const active = useActive(item);
+  return (
+    <li className="flex-1">
+      <NavLink to={item.to} className={cx('flex h-full w-full flex-col items-center justify-center gap-1 transition-colors', active ? 'text-accent' : 'text-fg-2 hover:text-accent')}>
+        <div className={cx('flex items-center justify-center rounded-r12 px-4 py-1', active && 'bg-muted')}>
+          <Icon name={item.icon} fill={active ? 1 : 0} />
+        </div>
+        <span className={cx('font-label text-[10px] tracking-normal', active && 'font-bold')}>{t(item.label)}</span>
+      </NavLink>
+    </li>
+  );
+}
+
+function MobileBottomNav() {
+  return (
+    <nav className="pb-safe fixed bottom-0 left-0 z-40 w-full border-t border-line bg-surface px-2 pt-2 md:hidden">
+      <ul className="flex h-16 items-center justify-between">
+        {BOTTOM_NAV.map((item) => <BottomItem key={item.to} item={item} />)}
+      </ul>
+    </nav>
+  );
+}
+
+/** Authenticated app shell. Pages render via <Outlet/> (or children for the "/" route). */
+export const MainLayout = ({ children, title }) => {
+  const { t } = useTranslation();
+  const user = useAuthStore((s) => s.user);
+  const { data: profile } = useProfile(user?.id);
+  const { level } = computeLevel(profile?.stats?.totalPoints);
+  return (
+    <div className="min-h-screen bg-canvas text-fg">
+      <Sidebar user={user} levelText={t('shell.levelShort', { level })} />
+      <main className="flex min-h-screen flex-col md:ml-[240px]">
+        <TopBar title={title} />
+        <MobileTopBar user={user} />
+        <div className="flex-1 pb-[100px] md:pb-0">{children ?? <Outlet />}</div>
+      </main>
+      <MobileBottomNav />
     </div>
   );
 };

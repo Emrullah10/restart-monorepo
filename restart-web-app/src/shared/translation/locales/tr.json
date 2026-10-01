@@ -65,5 +65,86 @@
   "marketplaceTitle": "İkinci El Pazarı",
   "leaderboardTitle": "Liderlik Tablosu",
   "badgesTitle": "Kazanılan Rozetler",
-  "rewardsTitle": "Ödül Mağazası"
+  "rewardsTitle": "Ödül Mağazası",
+  "brand": {
+    "name": "ReStart",
+    "tagline": "DÖNGÜSEL EKONOMİ"
+  },
+  "nav": {
+    "home": "Ana Sayfa",
+    "map": "Harita",
+    "recycle": "Geri Dönüştür",
+    "recycleShort": "Dönüştür",
+    "sell": "Sat",
+    "rewards": "Ödüller",
+    "repair": "Tamir",
+    "profile": "Profil",
+    "settings": "Ayarlar",
+    "notifications": "Bildirimler"
+  },
+  "shell": {
+    "language": "Dil",
+    "theme": "Tema",
+    "levelShort": "Seviye {{level}}",
+    "user": "Kullanıcı"
+  },
+  "time": {
+    "now": "Az önce",
+    "today": "Bugün",
+    "yesterday": "Dün",
+    "minutesAgo": "{{count}} dk önce",
+    "daysAgo": "{{count}} gün önce",
+    "weeksAgo": "{{count}} hafta önce"
+  },
+  "levels": {
+    "new": "Yeni",
+    "curious": "Meraklı",
+    "aware": "Duyarlı",
+    "conscious": "Bilinçli",
+    "pioneer": "Öncü",
+    "champion": "Şampiyon",
+    "bronze": "Bronz",
+    "silver": "Gümüş",
+    "gold": "Altın"
+  },
+  "units": {
+    "count": "adet",
+    "kg": "kg",
+    "km": "km",
+    "points": "Puan",
+    "pointsLower": "puan"
+  },
+  "home": {
+    "greeting": "Merhaba, {{name}}",
+    "subtitle": "Bugün doğaya nasıl katkı sağlamak istersiniz?",
+    "impactLabel": "ÇEVRESEL ETKİNİZ",
+    "impactSub": "KURTARILAN CO₂",
+    "repair": "Tamir Et",
+    "repairSub": "Cihazlarınızı hayata döndürün",
+    "sell": "Sat",
+    "sellSub": "Kullanmadıklarınızı değerlendirin",
+    "recycle": "Geri Dönüştür",
+    "recycleSub": "Doğru ayrıştırma noktaları",
+    "statRepaired": "ONARILAN",
+    "statWaste": "ÖNLENEN ATIK",
+    "statEarnings": "KAZANÇ",
+    "statLevel": "SEVİYE",
+    "recentTitle": "SON AKTİVİTELER",
+    "all": "TÜMÜ",
+    "nearbyTitle": "YAKINDAKİ NOKTALAR",
+    "toMap": "HARİTA",
+    "noActivity": "Henüz aktivite yok.",
+    "noServices": "Yakında nokta bulunamadı."
+  },
+  "activity": {
+    "completed": "Tamamlandı",
+    "pointsGain": "+{{points}} Puan",
+    "amountGain": "+{{amount}}"
+  },
+  "common": {
+    "loading": "Yükleniyor…",
+    "retry": "Tekrar dene",
+    "error": "Bir şeyler ters gitti.",
+    "comingSoon": "Yakında"
+  }
 }

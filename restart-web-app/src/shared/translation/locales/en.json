@@ -65,5 +65,86 @@
   "marketplaceTitle": "Second-Hand Marketplace",
   "leaderboardTitle": "Leaderboard",
   "badgesTitle": "Badges Earned",
-  "rewardsTitle": "Rewards Shop"
+  "rewardsTitle": "Rewards Shop",
+  "brand": {
+    "name": "ReStart",
+    "tagline": "CIRCULAR ECONOMY"
+  },
+  "nav": {
+    "home": "Home",
+    "map": "Map",
+    "recycle": "Recycle",
+    "recycleShort": "Recycle",
+    "sell": "Sell",
+    "rewards": "Rewards",
+    "repair": "Repair",
+    "profile": "Profile",
+    "settings": "Settings",
+    "notifications": "Notifications"
+  },
+  "shell": {
+    "language": "Language",
+    "theme": "Theme",
+    "levelShort": "Level {{level}}",
+    "user": "User"
+  },
+  "time": {
+    "now": "Just now",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "minutesAgo": "{{count}} min ago",
+    "daysAgo": "{{count}} days ago",
+    "weeksAgo": "{{count}} weeks ago"
+  },
+  "levels": {
+    "new": "New",
+    "curious": "Curious",
+    "aware": "Aware",
+    "conscious": "Conscious",
+    "pioneer": "Pioneer",
+    "champion": "Champion",
+    "bronze": "Bronze",
+    "silver": "Silver",
+    "gold": "Gold"
+  },
+  "units": {
+    "count": "pcs",
+    "kg": "kg",
+    "km": "km",
+    "points": "Points",
+    "pointsLower": "points"
+  },
+  "home": {
+    "greeting": "Hello, {{name}}",
+    "subtitle": "How would you like to help nature today?",
+    "impactLabel": "YOUR ENVIRONMENTAL IMPACT",
+    "impactSub": "CO₂ SAVED",
+    "repair": "Repair",
+    "repairSub": "Bring your devices back to life",
+    "sell": "Sell",
+    "sellSub": "Put unused items to work",
+    "recycle": "Recycle",
+    "recycleSub": "The right sorting points",
+    "statRepaired": "REPAIRED",
+    "statWaste": "WASTE PREVENTED",
+    "statEarnings": "EARNINGS",
+    "statLevel": "LEVEL",
+    "recentTitle": "RECENT ACTIVITY",
+    "all": "ALL",
+    "nearbyTitle": "NEARBY SPOTS",
+    "toMap": "MAP",
+    "noActivity": "No activity yet.",
+    "noServices": "No spots found nearby."
+  },
+  "activity": {
+    "completed": "Completed",
+    "pointsGain": "+{{points}} Points",
+    "amountGain": "+{{amount}}"
+  },
+  "common": {
+    "loading": "Loading…",
+    "retry": "Try again",
+    "error": "Something went wrong.",
+    "comingSoon": "Coming soon"
+  }
 }
