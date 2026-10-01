@@ -51,7 +51,7 @@ export const RegisterForm = () => {
         <div className="mt-space-2 flex items-start gap-space-3">
           <input id="terms" type="checkbox" checked={terms} onChange={(e) => setTerms(e.target.checked)} className="mt-0.5 h-4 w-4 cursor-pointer rounded-r2 border-line bg-field-canvas accent-[var(--c-accent)]" />
           <label htmlFor="terms" className="cursor-pointer select-none font-caption text-caption text-fg-3">
-            <span className="text-accent hover:underline">{t('auth.terms')}</span>{t('auth.termsMid')}<span className="text-accent hover:underline">{t('auth.privacy')}</span>{t('auth.termsEnd')}
+            <Link to="/terms" className="text-accent hover:underline">{t('auth.terms')}</Link>{t('auth.termsMid')}<Link to="/privacy" className="text-accent hover:underline">{t('auth.privacy')}</Link>{t('auth.termsEnd')}
           </label>
         </div>
         {errorMsg && <p role="alert" className="font-caption text-caption text-danger">{errorMsg}</p>}

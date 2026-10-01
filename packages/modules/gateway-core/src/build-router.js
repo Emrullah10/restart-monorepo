@@ -31,7 +31,12 @@ export const buildRouter = ({
     });
 
     const method = route.method === 'get' ? 'get' : 'use';
-    const middlewares = route.auth === 'required' ? [requireAuth, proxy] : [proxy];
+    // Verified identity for downstream services (overwrites anything the client sent).
+    const injectIdentity = (req, _res, next) => {
+      req.headers['x-user-id'] = String(req.user.userId);
+      next();
+    };
+    const middlewares = route.auth === 'required' ? [requireAuth, injectIdentity, proxy] : [proxy];
 
     router[method](route.path, ...middlewares);
   }

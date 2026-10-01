@@ -10,3 +10,4 @@ export { TextField } from './TextField';
 export { PasswordStrength } from './PasswordStrength';
 export { Skeleton } from './Skeleton';
 export { EmptyState } from './EmptyState';
+export { Switch } from './Switch';

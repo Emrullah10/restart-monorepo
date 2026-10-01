@@ -414,7 +414,33 @@
     "about": "About",
     "terms": "Terms of Service",
     "privacy": "Privacy Policy",
-    "version": "Version"
+    "version": "Version",
+    "passwordHint": "Choose a strong password to protect your account.",
+    "currentPassword": "CURRENT PASSWORD",
+    "newPassword": "NEW PASSWORD",
+    "passwordSave": "UPDATE PASSWORD",
+    "passwordChanged": "Your password was updated.",
+    "passwordWrong": "The current password is incorrect.",
+    "passwordTooShort": "New password must be at least 8 characters.",
+    "notifPrefsHint": "Choose which notifications you want to receive.",
+    "prefs": {
+      "recycle": {
+        "title": "Recycling",
+        "desc": "Delivery and points updates"
+      },
+      "marketplace": {
+        "title": "Marketplace",
+        "desc": "Listing and sales updates"
+      },
+      "rewards": {
+        "title": "Rewards",
+        "desc": "New rewards and level-ups"
+      },
+      "system": {
+        "title": "System",
+        "desc": "Maintenance and announcements"
+      }
+    }
   },
   "notifications": {
     "all": "ALL ({{count}})",

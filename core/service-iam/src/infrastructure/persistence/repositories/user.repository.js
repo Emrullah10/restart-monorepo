@@ -165,6 +165,25 @@ export const makeUserRepository = ({ query }) => ({
     await query('UPDATE notifications SET is_read = true WHERE id = $1', [notificationId]);
   },
 
+  updatePasswordHash: async (userId, passwordHash) => {
+    await query('UPDATE users SET password_hash = $1 WHERE id = $2', [passwordHash, userId]);
+  },
+
+  getNotificationPreferences: async (userId) => {
+    const result = await query('SELECT * FROM notification_preferences WHERE user_id = $1', [userId]);
+    const row = result.rows[0];
+    return { recycle: row?.recycle ?? true, marketplace: row?.marketplace ?? true, rewards: row?.rewards ?? true, system: row?.system ?? true };
+  },
+
+  saveNotificationPreferences: async (userId, prefs) => {
+    await query(
+      `INSERT INTO notification_preferences (user_id, recycle, marketplace, rewards, system)
+       VALUES ($1, $2, $3, $4, $5)
+       ON CONFLICT (user_id) DO UPDATE SET recycle = $2, marketplace = $3, rewards = $4, system = $5`,
+      [userId, prefs.recycle, prefs.marketplace, prefs.rewards, prefs.system]
+    );
+  },
+
   markAllNotificationsRead: async (userId) => {
     await query('UPDATE notifications SET is_read = true WHERE user_id = $1', [userId]);
   },

@@ -19,7 +19,7 @@ export const ProfilePage = () => {
   const count = (type) => all.filter((a) => a.activityType === type).length;
   const total = Math.max(1, count('recycle') + count('sell') + count('repair'));
   const bars = [['recycle', 'bg-accent-strong'], ['sell', 'bg-sell'], ['repair', 'bg-repair']];
-  const created = profile?.user?.createdAt;
+  const created = profile?.createdAt;
 
   return (
     <main className="mx-auto max-w-[1180px] p-space-6 pb-32 md:p-space-8 md:pb-space-8">

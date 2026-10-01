@@ -12,6 +12,8 @@ import { makeRedeemReward } from '@restart/core-iam/src/application/use-cases/re
 import { makeSubmitContactMessage } from '@restart/core-iam/src/application/use-cases/submit-contact-message.use-case.js';
 import { makeGetNotifications } from '@restart/core-iam/src/application/use-cases/get-notifications.use-case.js';
 import { makeMarkNotificationRead, makeMarkAllNotificationsRead } from '@restart/core-iam/src/application/use-cases/mark-notifications-read.use-case.js';
+import { makeChangePassword } from '@restart/core-iam/src/application/use-cases/change-password.use-case.js';
+import { makeGetNotificationPreferences, makeUpdateNotificationPreferences } from '@restart/core-iam/src/application/use-cases/notification-preferences.use-case.js';
 import { makeUsersController } from '@restart/core-iam/src/interfaces/http/users.controller.js';
 import { makeGamificationController } from '@restart/core-iam/src/interfaces/http/gamification.controller.js';
 import { makeMiscController } from '@restart/core-iam/src/interfaces/http/misc.controller.js';
@@ -37,11 +39,18 @@ export const buildContainer = ({ datasourceConfig = makeDatasourceConfig(), tran
   const markNotificationRead = makeMarkNotificationRead({ userRepo });
   const markAllNotificationsRead = makeMarkAllNotificationsRead({ userRepo });
 
-  const usersController = makeUsersController({ registerUser, loginUser, getUserProfile });
+  const changePassword = makeChangePassword({ userRepo });
+  const getNotificationPreferences = makeGetNotificationPreferences({ userRepo });
+  const updateNotificationPreferences = makeUpdateNotificationPreferences({ userRepo });
+
+  const usersController = makeUsersController({ registerUser, loginUser, getUserProfile, changePassword, getNotificationPreferences, updateNotificationPreferences });
   const wrappedController = {
     register: wrap(usersController.register),
     login: wrap(usersController.login),
     getProfile: wrap(usersController.getProfile),
+    changePassword: wrap(usersController.changePassword),
+    getNotificationPreferences: wrap(usersController.getNotificationPreferences),
+    updateNotificationPreferences: wrap(usersController.updateNotificationPreferences),
   };
 
   const gamificationController = makeGamificationController({ getLeaderboard, getUserBadges });

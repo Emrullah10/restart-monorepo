@@ -20,6 +20,9 @@ import SettingsPage from '@pages/SettingsPage';
 import CreateListingPage from '@pages/CreateListingPage';
 import PublicMarketplacePage from '@pages/PublicMarketplacePage';
 import NotFoundPage from '@pages/NotFoundPage';
+import SettingsPasswordPage from '@pages/SettingsPasswordPage';
+import NotificationPreferencesPage from '@pages/NotificationPreferencesPage';
+import LegalPage from '@pages/LegalPage';
 
 const PublicMarketplaceRoute = () => {
   const user = useAuthStore((state) => state.user);
@@ -67,6 +70,12 @@ export const AppRouter = () => {
           <Route path="/register" element={<RegisterPage />} />
         </Route>
 
+        {/* Legal pages (public) */}
+        <Route element={<PublicLayout />}>
+          <Route path="/terms" element={<LegalPage kind="terms" />} />
+          <Route path="/privacy" element={<LegalPage kind="privacy" />} />
+        </Route>
+
         {/* Public Marketplace Showcase (no login required) */}
         <Route element={<PublicLayout />}>
           <Route path="/pazar" element={<PublicMarketplaceRoute />} />
@@ -83,6 +92,8 @@ export const AppRouter = () => {
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/notifications" element={<NotificationsPage />} />
             <Route path="/settings" element={<SettingsPage />} />
+            <Route path="/settings/password" element={<SettingsPasswordPage />} />
+            <Route path="/settings/notifications" element={<NotificationPreferencesPage />} />
             <Route path="/create-listing" element={<CreateListingPage />} />
           </Route>
         </Route>

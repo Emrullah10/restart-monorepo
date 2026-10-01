@@ -10,6 +10,9 @@ export const createAuthRoutes = ({ usersController }) => {
 export const createUserRoutes = ({ usersController }) => {
   const router = Router();
   router.get('/profile/:userId', usersController.getProfile);
+  router.patch('/password', usersController.changePassword);
+  router.get('/notification-preferences', usersController.getNotificationPreferences);
+  router.put('/notification-preferences', usersController.updateNotificationPreferences);
   return router;
 };
 

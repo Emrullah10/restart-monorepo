@@ -414,7 +414,33 @@
     "about": "Hakkında",
     "terms": "Hizmet Şartları",
     "privacy": "Gizlilik Politikası",
-    "version": "Sürüm"
+    "version": "Sürüm",
+    "passwordHint": "Hesabınızı korumak için güçlü bir şifre seçin.",
+    "currentPassword": "MEVCUT ŞİFRE",
+    "newPassword": "YENİ ŞİFRE",
+    "passwordSave": "ŞİFREYİ GÜNCELLE",
+    "passwordChanged": "Şifreniz güncellendi.",
+    "passwordWrong": "Mevcut şifre hatalı.",
+    "passwordTooShort": "Yeni şifre en az 8 karakter olmalı.",
+    "notifPrefsHint": "Hangi türde bildirim almak istediğinizi seçin.",
+    "prefs": {
+      "recycle": {
+        "title": "Geri dönüşüm",
+        "desc": "Teslimat ve puan bildirimleri"
+      },
+      "marketplace": {
+        "title": "Pazaryeri",
+        "desc": "İlan ve satış güncellemeleri"
+      },
+      "rewards": {
+        "title": "Ödüller",
+        "desc": "Yeni ödül ve seviye bildirimleri"
+      },
+      "system": {
+        "title": "Sistem",
+        "desc": "Bakım ve duyurular"
+      }
+    }
   },
   "notifications": {
     "all": "TÜMÜ ({{count}})",

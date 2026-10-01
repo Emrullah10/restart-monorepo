@@ -4,7 +4,6 @@ import { Icon, cx } from '@components/ui';
 import { useThemeStore } from '@store/themeStore';
 import { useAuthStore } from '@store/authStore';
 import { authApi } from '@api/auth.api';
-import { LEGAL } from '@shared/config';
 
 const sec = 'border-b border-line pb-2 font-label text-label uppercase tracking-wider text-fg-2';
 const box = 'flex flex-col rounded-r4 border border-line bg-raised';
@@ -50,7 +49,7 @@ export const SettingsPage = () => {
         <section className="flex flex-col gap-space-4">
           <h3 className={sec}>{t('settings.account')}</h3>
           <div className={box}>
-            {[['person', 'settings.profileInfo', '/profile'], ['key', 'settings.passwordAuth', null], ['notifications_active', 'settings.notifPrefs', '/notifications']].map(([ic, k, to], i, a) => {
+            {[['person', 'settings.profileInfo', '/profile'], ['key', 'settings.passwordAuth', '/settings/password'], ['notifications_active', 'settings.notifPrefs', '/settings/notifications']].map(([ic, k, to], i, a) => {
               const inner = <><div className="flex items-center gap-space-4"><Icon name={ic} className="text-fg-2" /><span className="font-heading-md text-base text-fg">{t(k)}</span></div><Icon name="chevron_right" className="text-fg-2" /></>;
               const cls = cx(row, i < a.length - 1 && 'border-b border-line');
               return to ? <Link key={k} to={to} className={cls}>{inner}</Link> : <button key={k} type="button" onClick={() => window.alert(t('common.comingSoon'))} className={cx(cls, 'w-full text-left')}>{inner}</button>;
@@ -72,8 +71,8 @@ export const SettingsPage = () => {
         <section className="flex flex-col gap-space-4">
           <h3 className={sec}>{t('settings.about')}</h3>
           <div className={box}>
-            <a href={LEGAL.terms} className={cx(row, 'border-b border-line')}><span className="font-body-md text-body-md text-fg">{t('settings.terms')}</span><Icon name="open_in_new" size={14} className="text-fg-2" /></a>
-            <a href={LEGAL.privacy} className={cx(row, 'border-b border-line')}><span className="font-body-md text-body-md text-fg">{t('settings.privacy')}</span><Icon name="open_in_new" size={14} className="text-fg-2" /></a>
+            <Link to="/terms" className={cx(row, 'border-b border-line')}><span className="font-body-md text-body-md text-fg">{t('settings.terms')}</span><Icon name="chevron_right" size={18} className="text-fg-2" /></Link>
+            <Link to="/privacy" className={cx(row, 'border-b border-line')}><span className="font-body-md text-body-md text-fg">{t('settings.privacy')}</span><Icon name="chevron_right" size={18} className="text-fg-2" /></Link>
             <div className="flex items-center justify-between bg-raised p-space-5"><span className="font-body-md text-body-md text-fg-2">{t('settings.version')}</span><span className="font-label text-label text-fg-2">{__APP_VERSION__}</span></div>
           </div>
         </section>
