@@ -1,4 +1,4 @@
-import { ValidationError } from '@restart/errors';
+import { ValidationError } from '@teknolup/errors';
 
 const POINTS_PER_UNIT = { plastic: 5, glass: 3, electronic: 20 };
 const DEFAULT_POINTS_PER_UNIT = 1;

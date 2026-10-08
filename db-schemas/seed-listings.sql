@@ -1,6 +1,6 @@
 -- Demo seller account (password is never used for login; placeholder hash)
 INSERT INTO users (id, email, password_hash, full_name, role)
-VALUES ('00000000-0000-0000-0000-000000000001', 'demo-seller@restart.app', 'seed-placeholder-hash', 'ReStart Vitrin', 'user')
+VALUES ('00000000-0000-0000-0000-000000000001', 'demo-seller@teknolup.com', 'seed-placeholder-hash', 'TeknoLup Vitrin', 'user')
 ON CONFLICT (email) DO NOTHING;
 
 INSERT INTO listings (id, user_id, title, description, category, price, status, image_url, location)

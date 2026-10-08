@@ -1,4 +1,4 @@
-import { ValidationError } from '@restart/errors';
+import { ValidationError } from '@teknolup/errors';
 
 export const makeListing = ({ id, userId, title, description, category, price, status, imageUrl, location, createdAt }) => ({
   id,

@@ -1,4 +1,4 @@
-import { ValidationError } from '@restart/errors';
+import { ValidationError } from '@teknolup/errors';
 
 export const makeGetNearbyServices = ({ operationRepo }) => async ({ lat, lng, radiusMeters = 5000, type } = {}) => {
   if (!lat || !lng) {

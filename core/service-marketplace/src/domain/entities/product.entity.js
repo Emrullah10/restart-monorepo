@@ -1,4 +1,4 @@
-import { ValidationError } from '@restart/errors';
+import { ValidationError } from '@teknolup/errors';
 
 export const makeProduct = ({ id, sellerId, title, description, category, price, rating, location, imageUrl, isAvailable, createdAt }) => ({
   id,

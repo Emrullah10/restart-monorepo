@@ -1,10 +1,10 @@
 {
-  "name": "@restart/core-operation",
+  "name": "@teknolup/core-operation",
   "version": "1.0.0",
   "type": "module",
   "main": "src/index.js",
   "dependencies": {
     "@google/generative-ai": "^0.1.3",
-    "@restart/errors": "*"
+    "@teknolup/errors": "*"
   }
 }

@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { NotFoundError, UnauthorizedError, ValidationError } from '@restart/errors';
+import { NotFoundError, UnauthorizedError, ValidationError } from '@teknolup/errors';
 
 const SALT_ROUNDS = 10;
 export const MIN_PASSWORD_LENGTH = 8;

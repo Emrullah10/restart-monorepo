@@ -1,4 +1,4 @@
-import { ValidationError } from '@restart/errors';
+import { ValidationError } from '@teknolup/errors';
 
 export const makeSubmitContactMessage = () => async ({ name, email, message }) => {
   if (!name || !email || !message) {

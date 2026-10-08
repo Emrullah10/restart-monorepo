@@ -1,10 +1,10 @@
 // Rich demo seed — re-runnable, cleans previous demo rows first.
 // Run from monorepo root:  node db-schemas/seed-rich-demo.mjs
-// Demo logins: demo01@restart.app … demo30@restart.app  /  password: Demo1234!
+// Demo logins: demo01@teknolup.com … demo30@teknolup.com  /  password: Demo1234!
 
 import bcrypt from 'bcrypt';
-import { makeDatasource } from '@restart/datasource';
-import { makeDatasourceConfig } from '@restart/config';
+import { makeDatasource } from '@teknolup/datasource';
+import { makeDatasourceConfig } from '@teknolup/config';
 
 const { query, pool } = makeDatasource(makeDatasourceConfig());
 const rnd  = (a, b)  => Math.floor(Math.random() * (b - a + 1)) + a;
@@ -228,7 +228,7 @@ const REWARDS_DATA = [
 // CLEAN PREVIOUS DEMO DATA
 // ──────────────────────────────────────────────
 console.log('🧹 Eski demo verileri temizleniyor...');
-const old = (await query(`SELECT id FROM users WHERE email LIKE 'demo__@restart.app'`)).rows.map(r => r.id);
+const old = (await query(`SELECT id FROM users WHERE email LIKE 'demo__@teknolup.com'`)).rows.map(r => r.id);
 if (old.length) {
   for (const t of ['recycle_logs', 'activities', 'notifications', 'notification_preferences', 'listings', 'products', 'couriers', 'user_stats']) {
     const col = t === 'products' ? 'seller_id' : 'user_id';
@@ -263,7 +263,7 @@ const hash = await bcrypt.hash('Demo1234!', 10);
 const users = [];
 
 for (let i = 0; i < NAMES.length; i++) {
-  const email     = `demo${String(i + 1).padStart(2, '0')}@restart.app`;
+  const email     = `demo${String(i + 1).padStart(2, '0')}@teknolup.com`;
   const avatar    = pick(AVATARS);
   const { rows } = await query(
     'INSERT INTO users (email, password_hash, full_name, avatar_url, created_at) VALUES ($1,$2,$3,$4,$5) RETURNING id',
@@ -436,6 +436,6 @@ console.log(`   İlanlar        : ${nL} yeni  (toplam: ${lCount})`);
 console.log(`   Marketplace    : ${nP} ürün  (toplam: ${pCount})`);
 console.log(`   Geri Dönüşüm  : ${nR} kayıt`);
 console.log(`   Kuryeler       : 10`);
-console.log('\n   Demo giriş: demo01@restart.app … demo30@restart.app  /  Demo1234!');
+console.log('\n   Demo giriş: demo01@teknolup.com … demo30@teknolup.com  /  Demo1234!');
 
 await pool.end();

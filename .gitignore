@@ -1,14 +1,75 @@
+# ==========================================
+# Dotfiles & Hidden Directories
+# ==========================================
+.*
+!.gitignore
+!.gitkeep
+
+# ==========================================
+# VS Code / Code / OpenCode / Codex
+# ==========================================
+.vscode/
+.vscode*/
+*.code-workspace
+.code/
+.code*
+*.code
+.codex/
+.codex*/
+opencode.json
+*opencode*
+opencode/
+
+# ==========================================
+# Claude / Anthropic
+# ==========================================
+.claude/
+.claude*/
+CLAUDE.md
+claude.md
+*claude*
+*CLAUDE*
+claude/
+claude*/
+
+# ==========================================
+# OpenWolf / Wolf
+# ==========================================
+.wolf/
+.wolf*/
+OPENWOLF.md
+openwolf.md
+*openwolf*
+*OPENWOLF*
+openwolf/
+*wolf*
+*WOLF*
+
+# ==========================================
+# Agents & AI Directives
+# ==========================================
+AGENTS.md
+agents.md
+*AGENTS*
+*agents.md
+.agents/
+.agents*/
+
+# ==========================================
+# Dependencies & Build Artifacts
+# ==========================================
 node_modules/
-.env
-.env.local
-*.log
-npm-debug.log*
-.DS_Store
 dist/
 build/
 coverage/
-.vscode/*
-!.vscode/launch.json
 
+# ==========================================
+# Logs
+# ==========================================
+*.log
+npm-debug.log*
+
+# ==========================================
 # Local docs (not tracked)
+# ==========================================
 /docs/

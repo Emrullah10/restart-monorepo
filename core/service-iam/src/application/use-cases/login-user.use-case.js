@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { UnauthorizedError } from '@restart/errors';
+import { UnauthorizedError } from '@teknolup/errors';
 
 export const makeLoginUser = ({ userRepo, jwtSecret }) => async ({ email, password }) => {
   const user = await userRepo.findByEmail(email);

@@ -1,4 +1,4 @@
-import { NotFoundError } from '@restart/errors';
+import { NotFoundError } from '@teknolup/errors';
 
 export const makeGetUserProfile = ({ userRepo }) => async ({ userId }) => {
   const user = await userRepo.findById(userId);

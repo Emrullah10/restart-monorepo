@@ -1,4 +1,4 @@
-import { ValidationError } from '@restart/errors';
+import { ValidationError } from '@teknolup/errors';
 
 export const makeUser = ({ id, email, passwordHash, fullName, role, avatarUrl, createdAt }) => {
   const user = {

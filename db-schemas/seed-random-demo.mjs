@@ -1,9 +1,9 @@
 // Random demo data for local development. Re-runnable: removes previous demo rows first.
 //   node db-schemas/seed-random-demo.mjs          (uses DB_* env / defaults, same as the services)
-// Demo logins: demo01@restart.app … demo12@restart.app, password "Demo1234!"
+// Demo logins: demo01@teknolup.com … demo12@teknolup.com, password "Demo1234!"
 import bcrypt from 'bcrypt';
-import { makeDatasource } from '@restart/datasource';
-import { makeDatasourceConfig } from '@restart/config';
+import { makeDatasource } from '@teknolup/datasource';
+import { makeDatasourceConfig } from '@teknolup/config';
 
 const { query } = makeDatasource(makeDatasourceConfig());
 const rnd = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
@@ -45,7 +45,7 @@ const ACTS = [
 ];
 
 // ---- clean previous demo data
-const old = (await query(`SELECT id FROM users WHERE email LIKE 'demo__@restart.app'`)).rows.map((r) => r.id);
+const old = (await query(`SELECT id FROM users WHERE email LIKE 'demo__@teknolup.com'`)).rows.map((r) => r.id);
 if (old.length) {
   for (const t of ['recycle_logs', 'activities', 'notifications', 'listings', 'products', 'couriers', 'user_stats']) {
     const col = t === 'products' ? 'seller_id' : 'user_id';
@@ -58,7 +58,7 @@ if (old.length) {
 const hash = await bcrypt.hash('Demo1234!', 10);
 const users = [];
 for (let i = 0; i < NAMES.length; i++) {
-  const email = `demo${String(i + 1).padStart(2, '0')}@restart.app`;
+  const email = `demo${String(i + 1).padStart(2, '0')}@teknolup.com`;
   const { rows } = await query('INSERT INTO users (email, password_hash, full_name, created_at) VALUES ($1,$2,$3,$4) RETURNING id', [email, hash, NAMES[i], ago(400)]);
   const id = rows[0].id;
   users.push({ id, name: NAMES[i] });

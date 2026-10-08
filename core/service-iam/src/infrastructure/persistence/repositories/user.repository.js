@@ -1,4 +1,4 @@
-import { ValidationError } from '@restart/errors';
+import { ValidationError } from '@teknolup/errors';
 import { makeUser } from '../../../domain/entities/user.entity.js';
 import { makeDefaultUserStats, makeUserStats } from '../../../domain/entities/user-stats.entity.js';
 

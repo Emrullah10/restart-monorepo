@@ -1,0 +1,472 @@
+{
+  "appTitle": "TeknoLup",
+  "appTagline": "Sustainable Living Platform",
+  "homeTitle": "Step into sustainable living",
+  "homeSubtitle": "Repair, sell or recycle your electronic devices",
+  "whatToDo": "What would you like to do?",
+  "homeActionRepair": "Repair",
+  "homeActionRepairSub": "Renew your device with expert services",
+  "homeActionSell": "Sell",
+  "homeActionSellSub": "Turn unused devices into cash",
+  "homeActionRecycle": "Recycle",
+  "homeActionRecycleSub": "Give e-waste back to nature",
+  "impactSummaryTitle": "Your Environmental Impact",
+  "co2SavedLabel": "saved CO₂",
+  "recentActivities": "Recent Activities",
+  "viewAll": "View All",
+  "environmentalImpactTitle": "Environmental Impact Stats",
+  "statRepairedDevices": "Repaired Devices",
+  "statPreventedWaste": "Prevented E-Waste",
+  "statTotalEarnings": "Total Earnings",
+  "statLevel": "Level {{level}}",
+  "statEcoWarrior": "Eco Warrior",
+  "nearbyServicesTitle": "Nearby Service Points",
+  "viewOnMapButton": "View on Map",
+  "actionContact": "Contact",
+  "actionGetDirections": "Get Directions",
+  "loginWelcome": "Welcome Back",
+  "loginSubtitle": "Return to sustainable living",
+  "loginButton": "Sign In",
+  "emailHint": "Email Address",
+  "passwordHint": "Password",
+  "passwordConfirmHint": "Confirm Password",
+  "nameHint": "Full Name",
+  "orDivider": "or",
+  "noAccount": "Don't have an account?",
+  "haveAccount": "Already have an account?",
+  "registerTitle": "Create Account",
+  "registerSubtitle": "Join the TeknoLup community today",
+  "registerButton": "Sign Up",
+  "navMap": "Map",
+  "navHome": "Home",
+  "navSell": "Sell",
+  "navRewards": "Rewards",
+  "navRecycle": "Recycle",
+  "navRepair": "Repair",
+  "navProfile": "Profile",
+  "navSettings": "Settings",
+  "navNotifications": "Notifications",
+  "navLogout": "Sign Out",
+  "recycleTitle": "Recycle",
+  "recycleQuestion": "Which device would you like to recycle?",
+  "recycleSubtitle": "Select device type and start contributing to nature",
+  "devicePhone": "Smartphone",
+  "devicePhoneSub": "iPhone, Samsung etc.",
+  "deviceLaptop": "Laptop",
+  "deviceLaptopSub": "MacBook, PC notebook",
+  "deviceTablet": "Tablet",
+  "deviceTabletSub": "iPad, Android tablet",
+  "deviceOther": "Other Electronics",
+  "deviceOtherSub": "Smartwatch, headphones etc.",
+  "safeSellingTitle": "Safe Second-Hand Selling",
+  "safeSellingSub": "Sell your unused devices easily with TeknoLup assurance.",
+  "createListingButton": "+ Create New Listing",
+  "activeListings": "Your Active Listings",
+  "marketplaceTitle": "Second-Hand Marketplace",
+  "leaderboardTitle": "Leaderboard",
+  "badgesTitle": "Badges Earned",
+  "rewardsTitle": "Rewards Shop",
+  "brand": {
+    "name": "TeknoLup",
+    "tagline": "CIRCULAR ECONOMY"
+  },
+  "nav": {
+    "home": "Home",
+    "map": "Map",
+    "recycle": "Recycle",
+    "recycleShort": "Recycle",
+    "sell": "Sell",
+    "rewards": "Rewards",
+    "repair": "Repair",
+    "profile": "Profile",
+    "settings": "Settings",
+    "notifications": "Notifications",
+    "marketplace": "Marketplace",
+    "logout": "Sign Out"
+  },
+  "shell": {
+    "language": "Language",
+    "theme": "Theme",
+    "levelShort": "Level {{level}}",
+    "user": "User"
+  },
+  "time": {
+    "now": "Just now",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "minutesAgo": "{{count}} min ago",
+    "daysAgo": "{{count}} days ago",
+    "weeksAgo": "{{count}} weeks ago"
+  },
+  "levels": {
+    "new": "New",
+    "curious": "Curious",
+    "aware": "Aware",
+    "conscious": "Conscious",
+    "pioneer": "Pioneer",
+    "champion": "Champion",
+    "bronze": "Bronze",
+    "silver": "Silver",
+    "gold": "Gold"
+  },
+  "units": {
+    "count": "pcs",
+    "kg": "kg",
+    "km": "km",
+    "points": "Points",
+    "pointsLower": "points",
+    "pointsShort": "pts"
+  },
+  "home": {
+    "greeting": "Hello, {{name}}",
+    "subtitle": "How would you like to help nature today?",
+    "impactLabel": "YOUR ENVIRONMENTAL IMPACT",
+    "impactSub": "CO₂ SAVED",
+    "repair": "Repair",
+    "repairSub": "Bring your devices back to life",
+    "sell": "Sell",
+    "sellSub": "Put unused items to work",
+    "recycle": "Recycle",
+    "recycleSub": "The right sorting points",
+    "statRepaired": "REPAIRED",
+    "statWaste": "WASTE PREVENTED",
+    "statEarnings": "EARNINGS",
+    "statLevel": "LEVEL",
+    "recentTitle": "RECENT ACTIVITY",
+    "all": "ALL",
+    "nearbyTitle": "NEARBY SPOTS",
+    "toMap": "MAP",
+    "noActivity": "No activity yet.",
+    "noServices": "No spots found nearby."
+  },
+  "activity": {
+    "completed": "Completed",
+    "pointsGain": "+{{points}} Points",
+    "amountGain": "+{{amount}}"
+  },
+  "common": {
+    "loading": "Loading…",
+    "retry": "Try again",
+    "error": "Something went wrong.",
+    "comingSoon": "Coming soon"
+  },
+  "auth": {
+    "slogan": "A second life for your device",
+    "copyright": "© {{year}} TeknoLup Inc. All rights reserved.",
+    "features": {
+      "repair": "Repair",
+      "sell": "Sell",
+      "recycle": "Recycle",
+      "reward": "Earn rewards"
+    },
+    "featureDesc": {
+      "repair": "Have broken items fixed by authorised services.",
+      "sell": "Give unused products a new life on the second-hand market.",
+      "recycle": "Return end-of-life products to nature.",
+      "reward": "Collect points with every sustainable step."
+    },
+    "registerHeadline1": "Repair the future,",
+    "registerHeadline2": "create value.",
+    "loginTitle": "Welcome back",
+    "loginSubtitle": "Sign in to your account",
+    "email": "Email",
+    "emailAddress": "EMAIL ADDRESS",
+    "emailPlaceholder": "name@company.com",
+    "password": "Password",
+    "passwordConfirm": "PASSWORD (REPEAT)",
+    "fullName": "FULL NAME",
+    "fullNamePlaceholder": "Your full name",
+    "forgot": "Forgot your password?",
+    "loginButton": "Sign In",
+    "noAccount": "Don't have an account?",
+    "registerLink": "Sign up",
+    "browseMarket": "Browse the marketplace without signing in",
+    "registerTitle": "Create Account",
+    "registerSubtitle": "Fill in your details to create your account. Already have one?",
+    "registerButton": "COMPLETE SIGN-UP",
+    "minChars": "At least 8 characters",
+    "terms": "Terms of Service",
+    "termsMid": " and ",
+    "privacy": "Privacy Policy",
+    "termsEnd": " — I have read and accept them.",
+    "fillAll": "Please fill in all fields.",
+    "mismatch": "Passwords do not match.",
+    "termsRequired": "You must accept the terms to continue.",
+    "loginFailed": "Could not sign in",
+    "registerFailed": "Could not register",
+    "strength": {
+      "idle": "Password strength",
+      "weak": "Weak",
+      "fair": "Fair",
+      "good": "Good",
+      "strong": "Strong"
+    }
+  },
+  "market": {
+    "title": "Marketplace",
+    "subtitle": "Buy and sell second-hand devices with confidence. Contribute to the circular economy.",
+    "createListing": "Post a Listing",
+    "guaranteeTitle": "TeknoLup Guarantee",
+    "guaranteeBody": "Every device is inspected by our technical team and seller details are verified. Your transactions are protected by a secure payment infrastructure.",
+    "listingSearch": "Search listings...",
+    "myListings": "My Listings",
+    "seeAll": "See all",
+    "allListings": "Marketplace Listings",
+    "sortBy": "Sort:",
+    "sortNew": "Newest first",
+    "sortAsc": "Price (low to high)",
+    "sortDesc": "Price (high to low)",
+    "statusActive": "ACTIVE",
+    "statusSold": "SOLD",
+    "emptyTitle": "No listings found",
+    "emptyApp": "Try a different category.",
+    "emptyPublic": "Be the first to list in this category — a free account is all you need.",
+    "heroTitle": "Your device's second life starts here",
+    "heroSub": "Refurbished devices, safe shopping",
+    "searchPlaceholder": "Search brand, model or category...",
+    "searchButton": "Search",
+    "stats": "{{listings}} listings · {{kg}} kg of e-waste saved",
+    "ctaTitle": "Ready to sell or recycle?",
+    "ctaBody": "Put unused devices back into the economy: sell at fair value or recycle at licensed facilities and earn rewards. The process is fully transparent and data-driven.",
+    "categories": {
+      "all": "All",
+      "phone": "Phone",
+      "laptop": "Laptop",
+      "tablet": "Tablet",
+      "accessory": "Accessory"
+    }
+  },
+  "listing": {
+    "title": "New Listing",
+    "subtitle": "Enter your product's details to put it up for sale.",
+    "photos": "PHOTOS",
+    "photosHint": "The first photo is used as the cover image.",
+    "addCover": "ADD COVER",
+    "remove": "Remove",
+    "titleLabel": "TITLE",
+    "titlePlaceholder": "e.g. 2021 Apple MacBook Pro M1",
+    "category": "CATEGORY",
+    "categoryPlaceholder": "Select a category",
+    "description": "DESCRIPTION",
+    "descriptionPlaceholder": "Describe the condition, features and any defects in detail.",
+    "price": "PRICE (TRY)",
+    "location": "LOCATION",
+    "locationPlaceholder": "Select a city",
+    "tipsTitle": "Safe Selling Tips",
+    "tipsBody": "Be clear in your description, mention any damage and use real photos. Trusted profiles sell faster.",
+    "publish": "Publish Listing",
+    "needLogin": "You must sign in to publish a listing.",
+    "failed": "Something went wrong while publishing. Please try again.",
+    "success": "Your listing was published!",
+    "redirecting": "Redirecting to the marketplace...",
+    "topTitle": "Create Listing"
+  },
+  "map": {
+    "search": "Search location or facility...",
+    "nearby": "FACILITIES NEAR YOU ({{count}})",
+    "directions": "Directions",
+    "locate": "My location",
+    "filters": {
+      "all": "All",
+      "repair": "Repair",
+      "recycle": "Recycling",
+      "sell": "Sales"
+    }
+  },
+  "repair": {
+    "title": "Device Repair",
+    "subtitle": "Extend the lifecycle of your electronics. Professional, vetted repair services.",
+    "impact": "ENVIRONMENTAL IMPACT",
+    "co2Saved": "CO₂ Saved",
+    "primary": "PRIMARY SERVICES",
+    "select": "Select Service",
+    "nearby": "NEARBY SERVICE CENTERS",
+    "viewOnMap": "View on Map",
+    "details": "Details",
+    "services": {
+      "screen": {
+        "title": "Screen & Glass",
+        "desc": "Cracked displays and shattered glass replacement."
+      },
+      "battery": {
+        "title": "Battery Replacement",
+        "desc": "Degraded battery diagnostics and swap."
+      },
+      "board": {
+        "title": "Motherboard",
+        "desc": "Component-level logic board repair and soldering."
+      }
+    }
+  },
+  "recycle": {
+    "steps": {
+      "device": "DEVICE",
+      "detail": "DETAILS",
+      "confirm": "CONFIRM"
+    },
+    "question": "Which device are you recycling?",
+    "questionSub": "The device type you choose helps us find suitable recycling facilities.",
+    "devices": {
+      "phone": {
+        "title": "Phone",
+        "sub": "Smartphones, feature phones"
+      },
+      "laptop": {
+        "title": "Laptop",
+        "sub": "Laptops, netbooks"
+      },
+      "tablet": {
+        "title": "Tablet",
+        "sub": "Tablet computers, e-readers"
+      },
+      "other": {
+        "title": "Other",
+        "sub": "Accessories, small appliances"
+      }
+    },
+    "detailsTitle": "Device Details",
+    "brandModel": "BRAND / MODEL",
+    "brandModelPh": "e.g. TechCorp X1",
+    "condition": "DEVICE CONDITION",
+    "conditions": {
+      "working": "Working",
+      "damaged": "Slightly damaged",
+      "broken": "Not working"
+    },
+    "weight": "WEIGHT (KG)",
+    "center": "FACILITY",
+    "centerPh": "Select a facility...",
+    "delivery": "Delivery Method",
+    "deliveries": {
+      "courier": {
+        "title": "Eco-Courier",
+        "desc": "Pickup from your address with a 100% electric fleet. Carbon neutral."
+      },
+      "dropoff": {
+        "title": "Drop-off",
+        "desc": "Deliver to your nearest TeknoLup collection point."
+      }
+    },
+    "estimate": "ESTIMATED GAIN",
+    "formula": "Formula: (Weight × 10) × Transport Multiplier",
+    "base": "Base points (Weight × 10):",
+    "bonus": "Eco-Courier bonus (50%):",
+    "co2": "CO₂ saved (estimate):",
+    "submit": "CREATE REQUEST",
+    "terms": "By creating a request you accept the TeknoLup Recycling Procedures.",
+    "needLogin": "You must sign in to create a recycling request.",
+    "pickCenter": "Please choose a recycling facility.",
+    "failed": "Something went wrong while sending your request. Please try again.",
+    "successTitle": "Request received",
+    "earned": "REWARD EARNED",
+    "co2Saved": "You saved {{kg}} kg of CO₂",
+    "backHome": "Back to Home",
+    "topTitle": "Recycle Device"
+  },
+  "rewards": {
+    "balance": "YOUR POINT BALANCE",
+    "leaderboard": "Leaderboard",
+    "noBoard": "No ranking data yet.",
+    "you": "You",
+    "badges": "Badges",
+    "catalog": "Reward Catalog",
+    "noRewards": "No rewards available right now",
+    "noRewardsSub": "New rewards are coming soon.",
+    "use": "Redeem",
+    "insufficient": "Not enough points",
+    "topTitle": "Rewards Center"
+  },
+  "profile": {
+    "verified": "VERIFIED",
+    "joined": "Joined",
+    "saving": "SAVINGS",
+    "points": "POINTS",
+    "actions": "ACTIONS",
+    "earnings": "EARNINGS",
+    "impactCard": "Your Impact Report",
+    "history": "Transaction History",
+    "modules": {
+      "recycle": "Recycling",
+      "sell": "Selling",
+      "repair": "Repair"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Manage your account preferences and application settings.",
+    "appearance": "Appearance",
+    "theme": "Interface Theme",
+    "themeHint": "Select your preferred color mode.",
+    "themes": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
+    "languageHint": "Choose the application language.",
+    "account": "Account",
+    "profileInfo": "Profile Information",
+    "passwordAuth": "Password & Authentication",
+    "notifPrefs": "Notification Preferences",
+    "security": "Security",
+    "session": "Session Security",
+    "lastActive": "Last active: Just now",
+    "secure": "Secure",
+    "about": "About",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy",
+    "version": "Version",
+    "passwordHint": "Choose a strong password to protect your account.",
+    "currentPassword": "CURRENT PASSWORD",
+    "newPassword": "NEW PASSWORD",
+    "passwordSave": "UPDATE PASSWORD",
+    "passwordChanged": "Your password was updated.",
+    "passwordWrong": "The current password is incorrect.",
+    "passwordTooShort": "New password must be at least 8 characters.",
+    "notifPrefsHint": "Choose which notifications you want to receive.",
+    "prefs": {
+      "recycle": {
+        "title": "Recycling",
+        "desc": "Delivery and points updates"
+      },
+      "marketplace": {
+        "title": "Marketplace",
+        "desc": "Listing and sales updates"
+      },
+      "rewards": {
+        "title": "Rewards",
+        "desc": "New rewards and level-ups"
+      },
+      "system": {
+        "title": "System",
+        "desc": "Maintenance and announcements"
+      }
+    }
+  },
+  "notifications": {
+    "all": "ALL ({{count}})",
+    "unread": "UNREAD ({{count}})",
+    "markAll": "Mark all as read",
+    "emptyTitle": "No notifications yet",
+    "emptySub": "New activity will show up here.",
+    "groups": {
+      "today": "TODAY",
+      "yesterday": "YESTERDAY",
+      "older": "EARLIER"
+    }
+  },
+  "notFound": {
+    "code": "ERROR CODE // ERR_404_NOT_FOUND",
+    "badge": "RECORD NOT FOUND",
+    "title": "This page could not be found",
+    "body": "The page you are looking for may have been moved, archived or never existed in the environmental inventory.",
+    "path": "Target Path",
+    "status": "System Status",
+    "online": "Core Directory Online",
+    "home": "Back to Home",
+    "map": "Open Network Map",
+    "back": "Go Back",
+    "report": "Report Issue",
+    "footer": "Circular Economy Platform",
+    "support": "Support"
+  }
+}

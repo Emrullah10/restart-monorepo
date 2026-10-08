@@ -1,4 +1,4 @@
-import { UnauthorizedError, ValidationError } from '@restart/errors';
+import { UnauthorizedError, ValidationError } from '@teknolup/errors';
 
 export const PREFERENCE_KEYS = ['recycle', 'marketplace', 'rewards', 'system'];
 

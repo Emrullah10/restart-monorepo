@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { ConflictError } from '@restart/errors';
+import { ConflictError } from '@teknolup/errors';
 import { makeUser, validateUser } from '../../domain/entities/user.entity.js';
 
 const SALT_ROUNDS = 10;

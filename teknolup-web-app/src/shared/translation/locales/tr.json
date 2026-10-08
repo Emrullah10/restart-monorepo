@@ -1,0 +1,472 @@
+{
+  "appTitle": "TeknoLup",
+  "appTagline": "Sürdürülebilir Yaşam Platformu",
+  "homeTitle": "Sürdürülebilir yaşama adım at",
+  "homeSubtitle": "Elektronik cihazlarınızı tamir edin, satın veya geri dönüştürün",
+  "whatToDo": "Ne yapmak istersin?",
+  "homeActionRepair": "Tamir Et",
+  "homeActionRepairSub": "Uzman servislerde cihazınızı yenileyin",
+  "homeActionSell": "Sat",
+  "homeActionSellSub": "Kullanmadığın cihazları nakde çevir",
+  "homeActionRecycle": "Geri Dönüştür",
+  "homeActionRecycleSub": "E-atıkları doğaya kazandır",
+  "impactSummaryTitle": "Çevresel Etkiniz",
+  "co2SavedLabel": "kurtarılan CO₂",
+  "recentActivities": "Son Aktiviteler",
+  "viewAll": "Tümünü Gör",
+  "environmentalImpactTitle": "Çevresel Etki İstatistikleri",
+  "statRepairedDevices": "Onarılan Cihazlar",
+  "statPreventedWaste": "Önlenen E-Atık",
+  "statTotalEarnings": "Toplam Kazanç",
+  "statLevel": "Seviye {{level}}",
+  "statEcoWarrior": "Çevre Dostu",
+  "nearbyServicesTitle": "Yakındaki Servis Noktaları",
+  "viewOnMapButton": "Haritada Gör",
+  "actionContact": "İletişime Geç",
+  "actionGetDirections": "Yol Tarifi Al",
+  "loginWelcome": "Hoş Geldin",
+  "loginSubtitle": "Sürdürülebilir yaşama geri dön",
+  "loginButton": "Giriş Yap",
+  "emailHint": "E-posta Adresi",
+  "passwordHint": "Şifre",
+  "passwordConfirmHint": "Şifre Tekrar",
+  "nameHint": "Ad Soyad",
+  "orDivider": "veya",
+  "noAccount": "Hesabın yok mu?",
+  "haveAccount": "Zaten hesabın var mı?",
+  "registerTitle": "Hesap Oluştur",
+  "registerSubtitle": "TeknoLup topluluğuna sen de katıl",
+  "registerButton": "Kayıt Ol",
+  "navMap": "Harita",
+  "navHome": "Ana Sayfa",
+  "navSell": "Satış",
+  "navRewards": "Ödüller",
+  "navRecycle": "Geri Dönüşüm",
+  "navRepair": "Tamir",
+  "navProfile": "Profil",
+  "navSettings": "Ayarlar",
+  "navNotifications": "Bildirimler",
+  "navLogout": "Çıkış Yap",
+  "recycleTitle": "Geri Dönüştür",
+  "recycleQuestion": "Hangi cihazı geri dönüştürmek istersin?",
+  "recycleSubtitle": "Cihaz türünü seç ve doğaya katkıda bulunmaya başla",
+  "devicePhone": "Akıllı Telefon",
+  "devicePhoneSub": "İPhone, Samsung vb.",
+  "deviceLaptop": "Dizüstü Bilgisayar",
+  "deviceLaptopSub": "MacBook, PC notebook",
+  "deviceTablet": "Tablet",
+  "deviceTabletSub": "iPad, Android tablet",
+  "deviceOther": "Diğer Elektronikler",
+  "deviceOtherSub": "Akıllı saat, kulaklık vb.",
+  "safeSellingTitle": "Güvenli İkinci El Satış",
+  "safeSellingSub": "TeknoLup güvencesiyle kullanmadığın cihazları kolayca sat.",
+  "createListingButton": "+ Yeni İlan Oluştur",
+  "activeListings": "Aktif İlanlarınız",
+  "marketplaceTitle": "İkinci El Pazarı",
+  "leaderboardTitle": "Liderlik Tablosu",
+  "badgesTitle": "Kazanılan Rozetler",
+  "rewardsTitle": "Ödül Mağazası",
+  "brand": {
+    "name": "TeknoLup",
+    "tagline": "DÖNGÜSEL EKONOMİ"
+  },
+  "nav": {
+    "home": "Ana Sayfa",
+    "map": "Harita",
+    "recycle": "Geri Dönüştür",
+    "recycleShort": "Dönüştür",
+    "sell": "Sat",
+    "rewards": "Ödüller",
+    "repair": "Tamir",
+    "profile": "Profil",
+    "settings": "Ayarlar",
+    "notifications": "Bildirimler",
+    "marketplace": "Pazaryeri",
+    "logout": "Çıkış Yap"
+  },
+  "shell": {
+    "language": "Dil",
+    "theme": "Tema",
+    "levelShort": "Seviye {{level}}",
+    "user": "Kullanıcı"
+  },
+  "time": {
+    "now": "Az önce",
+    "today": "Bugün",
+    "yesterday": "Dün",
+    "minutesAgo": "{{count}} dk önce",
+    "daysAgo": "{{count}} gün önce",
+    "weeksAgo": "{{count}} hafta önce"
+  },
+  "levels": {
+    "new": "Yeni",
+    "curious": "Meraklı",
+    "aware": "Duyarlı",
+    "conscious": "Bilinçli",
+    "pioneer": "Öncü",
+    "champion": "Şampiyon",
+    "bronze": "Bronz",
+    "silver": "Gümüş",
+    "gold": "Altın"
+  },
+  "units": {
+    "count": "adet",
+    "kg": "kg",
+    "km": "km",
+    "points": "Puan",
+    "pointsLower": "puan",
+    "pointsShort": "puan"
+  },
+  "home": {
+    "greeting": "Merhaba, {{name}}",
+    "subtitle": "Bugün doğaya nasıl katkı sağlamak istersiniz?",
+    "impactLabel": "ÇEVRESEL ETKİNİZ",
+    "impactSub": "KURTARILAN CO₂",
+    "repair": "Tamir Et",
+    "repairSub": "Cihazlarınızı hayata döndürün",
+    "sell": "Sat",
+    "sellSub": "Kullanmadıklarınızı değerlendirin",
+    "recycle": "Geri Dönüştür",
+    "recycleSub": "Doğru ayrıştırma noktaları",
+    "statRepaired": "ONARILAN",
+    "statWaste": "ÖNLENEN ATIK",
+    "statEarnings": "KAZANÇ",
+    "statLevel": "SEVİYE",
+    "recentTitle": "SON AKTİVİTELER",
+    "all": "TÜMÜ",
+    "nearbyTitle": "YAKINDAKİ NOKTALAR",
+    "toMap": "HARİTA",
+    "noActivity": "Henüz aktivite yok.",
+    "noServices": "Yakında nokta bulunamadı."
+  },
+  "activity": {
+    "completed": "Tamamlandı",
+    "pointsGain": "+{{points}} Puan",
+    "amountGain": "+{{amount}}"
+  },
+  "common": {
+    "loading": "Yükleniyor…",
+    "retry": "Tekrar dene",
+    "error": "Bir şeyler ters gitti.",
+    "comingSoon": "Yakında"
+  },
+  "auth": {
+    "slogan": "Cihazın ikinci hayatı",
+    "copyright": "© {{year}} TeknoLup Inc. Tüm hakları saklıdır.",
+    "features": {
+      "repair": "Tamir ettir",
+      "sell": "Sat",
+      "recycle": "Geri dönüştür",
+      "reward": "Ödül kazan"
+    },
+    "featureDesc": {
+      "repair": "Bozulan eşyalarınızı yetkili servislere onartın.",
+      "sell": "Kullanmadığınız ürünleri ikinci el pazarında değerlendirin.",
+      "recycle": "Ömrünü tamamlayan ürünleri doğaya kazandırın.",
+      "reward": "Sürdürülebilir adımlarınızla puan toplayın."
+    },
+    "registerHeadline1": "Geleceği Onar,",
+    "registerHeadline2": "Değer Yarat.",
+    "loginTitle": "Tekrar hoş geldiniz",
+    "loginSubtitle": "Hesabınıza giriş yapın",
+    "email": "E-posta",
+    "emailAddress": "E-POSTA ADRESİ",
+    "emailPlaceholder": "ornek@sirket.com",
+    "password": "Şifre",
+    "passwordConfirm": "ŞİFRE (TEKRAR)",
+    "fullName": "AD SOYAD",
+    "fullNamePlaceholder": "Adınız ve Soyadınız",
+    "forgot": "Şifrenizi mi unuttunuz?",
+    "loginButton": "Giriş Yap",
+    "noAccount": "Hesabınız yok mu?",
+    "registerLink": "Kayıt olun",
+    "browseMarket": "Giriş yapmadan pazara göz at",
+    "registerTitle": "Hesap Oluştur",
+    "registerSubtitle": "Hesabınızı oluşturmak için bilgilerinizi eksiksiz doldurun. Zaten hesabınız var mı?",
+    "registerButton": "KAYIT İŞLEMİNİ TAMAMLA",
+    "minChars": "En az 8 karakter",
+    "terms": "Hizmet Şartları",
+    "termsMid": "'nı ve ",
+    "privacy": "Gizlilik Politikası",
+    "termsEnd": "'nı okudum, kabul ediyorum.",
+    "fillAll": "Lütfen tüm alanları doldurun.",
+    "mismatch": "Şifreler eşleşmiyor.",
+    "termsRequired": "Devam etmek için şartları kabul etmelisiniz.",
+    "loginFailed": "Giriş yapılamadı",
+    "registerFailed": "Kayıt yapılamadı",
+    "strength": {
+      "idle": "Şifre gücü",
+      "weak": "Zayıf",
+      "fair": "Orta Seviye",
+      "good": "İyi",
+      "strong": "Güçlü"
+    }
+  },
+  "market": {
+    "title": "Pazaryeri",
+    "subtitle": "Güvenle ikinci el cihaz alıp satın. Döngüsel ekonomiye katkıda bulunun.",
+    "createListing": "İlan Ver",
+    "guaranteeTitle": "TeknoLup Güvencesi",
+    "guaranteeBody": "Tüm cihazlar teknik ekibimiz tarafından kontrol edilmiş olup, satıcı bilgileri doğrulanmıştır. Güvenli ödeme altyapısı ile işlemleriniz koruma altındadır.",
+    "listingSearch": "İlanlarda ara...",
+    "myListings": "İlanlarım",
+    "seeAll": "Tümünü Gör",
+    "allListings": "Pazaryeri İlanları",
+    "sortBy": "Sırala:",
+    "sortNew": "Yeniden Eskiye",
+    "sortAsc": "Fiyat (Artan)",
+    "sortDesc": "Fiyat (Azalan)",
+    "statusActive": "AKTİF",
+    "statusSold": "SATILDI",
+    "emptyTitle": "İlan bulunamadı",
+    "emptyApp": "Farklı bir kategori seçmeyi deneyin.",
+    "emptyPublic": "Bu kategoride ilk ilanı sen ver — ücretsiz hesap oluşturman yeterli.",
+    "heroTitle": "Cihazınızın ikinci hayatı burada başlıyor",
+    "heroSub": "Yenilenmiş cihazlar, güvenli alışveriş",
+    "searchPlaceholder": "Marka, model veya kategori ara...",
+    "searchButton": "Ara",
+    "stats": "{{listings}} ilan · {{kg}} kg e-atık kurtarıldı",
+    "ctaTitle": "Satmaya veya geri dönüştürmeye hazır mısınız?",
+    "ctaBody": "Kullanmadığınız cihazları ekonomiye kazandırın, değerinde satın veya lisanslı tesislerde geri dönüştürerek ödüller kazanın. Süreç tamamen şeffaf ve veriye dayalıdır.",
+    "categories": {
+      "all": "Tümü",
+      "phone": "Telefon",
+      "laptop": "Laptop",
+      "tablet": "Tablet",
+      "accessory": "Aksesuar"
+    }
+  },
+  "listing": {
+    "title": "Yeni İlan",
+    "subtitle": "Ürününüzün detaylarını girerek satışa sunun.",
+    "photos": "FOTOĞRAFLAR",
+    "photosHint": "İlk fotoğraf kapak görseli olarak kullanılacaktır.",
+    "addCover": "KAPAK EKLE",
+    "remove": "Kaldır",
+    "titleLabel": "BAŞLIK",
+    "titlePlaceholder": "Örn: 2021 Apple MacBook Pro M1",
+    "category": "KATEGORİ",
+    "categoryPlaceholder": "Kategori Seçin",
+    "description": "AÇIKLAMA",
+    "descriptionPlaceholder": "Ürününüzün durumunu, özelliklerini ve varsa kusurlarını detaylıca belirtin.",
+    "price": "FİYAT (TL)",
+    "location": "KONUM",
+    "locationPlaceholder": "Şehir Seçin",
+    "tipsTitle": "Güvenli Satış İpuçları",
+    "tipsBody": "Açıklamalarınızda net olun, deformasyonları belirtin ve gerçek fotoğraflar kullanın. Güvenilir profiller daha hızlı satış yapar.",
+    "publish": "İlanı Yayınla",
+    "needLogin": "İlan yayınlamak için giriş yapmalısınız.",
+    "failed": "İlan yayınlanırken bir hata oluştu. Lütfen tekrar deneyin.",
+    "success": "İlanınız başarıyla yayınlandı!",
+    "redirecting": "Satış sayfasına yönlendiriliyorsunuz...",
+    "topTitle": "İlan Oluştur"
+  },
+  "map": {
+    "search": "Konum veya tesis ara...",
+    "nearby": "YAKININIZDAKİ TESİSLER ({{count}})",
+    "directions": "Yol tarifi",
+    "locate": "Konumum",
+    "filters": {
+      "all": "Tümü",
+      "repair": "Tamir",
+      "recycle": "Geri Dönüşüm",
+      "sell": "Satış"
+    }
+  },
+  "repair": {
+    "title": "Cihaz Onarımı",
+    "subtitle": "Elektroniklerinizin ömrünü uzatın. Profesyonel ve denetlenmiş onarım hizmetleri.",
+    "impact": "ÇEVRESEL ETKİ",
+    "co2Saved": "CO₂ Tasarrufu",
+    "primary": "TEMEL HİZMETLER",
+    "select": "Hizmeti Seç",
+    "nearby": "YAKINDAKİ SERVİS MERKEZLERİ",
+    "viewOnMap": "Haritada Gör",
+    "details": "Detaylar",
+    "services": {
+      "screen": {
+        "title": "Ekran ve Cam",
+        "desc": "Çatlak ekran ve kırık cam değişimi."
+      },
+      "battery": {
+        "title": "Batarya Değişimi",
+        "desc": "Yıpranmış batarya teşhisi ve değişimi."
+      },
+      "board": {
+        "title": "Anakart",
+        "desc": "Bileşen düzeyinde anakart onarımı ve lehimleme."
+      }
+    }
+  },
+  "recycle": {
+    "steps": {
+      "device": "CİHAZ",
+      "detail": "DETAY",
+      "confirm": "ONAY"
+    },
+    "question": "Hangi cihazı geri dönüştürüyorsunuz?",
+    "questionSub": "Seçtiğiniz cihaz türü, uygun geri dönüşüm tesislerini bulmamıza yardımcı olacaktır.",
+    "devices": {
+      "phone": {
+        "title": "Telefon",
+        "sub": "Akıllı telefonlar, tuşlu telefonlar"
+      },
+      "laptop": {
+        "title": "Dizüstü",
+        "sub": "Laptoplar, netbooklar"
+      },
+      "tablet": {
+        "title": "Tablet",
+        "sub": "Tablet bilgisayarlar, e-okuyucular"
+      },
+      "other": {
+        "title": "Diğer",
+        "sub": "Aksesuarlar, küçük ev aletleri"
+      }
+    },
+    "detailsTitle": "Cihaz Detayları",
+    "brandModel": "MARKA / MODEL",
+    "brandModelPh": "Örn: TechCorp X1",
+    "condition": "CİHAZ DURUMU",
+    "conditions": {
+      "working": "Çalışıyor",
+      "damaged": "Hafif Hasarlı",
+      "broken": "Çalışmıyor"
+    },
+    "weight": "AĞIRLIK (KG)",
+    "center": "MERKEZ",
+    "centerPh": "Merkez Seçin...",
+    "delivery": "Teslimat Yöntemi",
+    "deliveries": {
+      "courier": {
+        "title": "Eko-Kurye",
+        "desc": "%100 Elektrikli araç filosu ile adresinizden alım. Karbon nötr."
+      },
+      "dropoff": {
+        "title": "Noktaya Bırakma",
+        "desc": "Size en yakın TeknoLup toplama noktasına teslim edin."
+      }
+    },
+    "estimate": "TAHMİNİ KAZANIM",
+    "formula": "Formül: (Ağırlık × 10) × Taşıma Çarpanı",
+    "base": "Baz Puan (Ağırlık × 10):",
+    "bonus": "Eko-Kurye Bonusu (%50):",
+    "co2": "CO₂ Tasarrufu (tahmini):",
+    "submit": "TALEBİ OLUŞTUR",
+    "terms": "Talebi oluşturarak TeknoLup Geri Dönüşüm Prosedürleri'ni kabul etmiş olursunuz.",
+    "needLogin": "Geri dönüşüm talebi oluşturmak için giriş yapmalısınız.",
+    "pickCenter": "Lütfen bir geri dönüşüm merkezi seçin.",
+    "failed": "Talep gönderilirken bir hata oluştu. Lütfen tekrar deneyin.",
+    "successTitle": "Talebiniz alındı",
+    "earned": "KAZANILAN ÖDÜL",
+    "co2Saved": "{{kg}} kg CO₂ tasarrufu sağladınız",
+    "backHome": "Ana Sayfaya Dön",
+    "topTitle": "Cihaz Geri Dönüşümü"
+  },
+  "rewards": {
+    "balance": "PUAN BAKİYENİZ",
+    "leaderboard": "Liderlik Tablosu",
+    "noBoard": "Henüz sıralama verisi yok.",
+    "you": "Siz",
+    "badges": "Rozetler",
+    "catalog": "Ödül Kataloğu",
+    "noRewards": "Şu anda kullanılabilir ödül yok",
+    "noRewardsSub": "Yakında yeni ödüller eklenecek.",
+    "use": "Kullan",
+    "insufficient": "Yetersiz Puan",
+    "topTitle": "Ödüller Merkezi"
+  },
+  "profile": {
+    "verified": "DOĞRULANMIŞ",
+    "joined": "Katılım",
+    "saving": "TASARRUF",
+    "points": "PUAN",
+    "actions": "İŞLEM",
+    "earnings": "KAZANÇ",
+    "impactCard": "Etki Karneniz",
+    "history": "İşlem Geçmişi",
+    "modules": {
+      "recycle": "Geri Dönüşüm",
+      "sell": "Satış",
+      "repair": "Tamir"
+    }
+  },
+  "settings": {
+    "title": "Ayarlar",
+    "subtitle": "Hesap tercihlerinizi ve uygulama ayarlarınızı yönetin.",
+    "appearance": "Görünüm",
+    "theme": "Arayüz Teması",
+    "themeHint": "Tercih ettiğiniz renk modunu seçin.",
+    "themes": {
+      "light": "Açık",
+      "dark": "Koyu",
+      "system": "Sistem"
+    },
+    "languageHint": "Uygulama dilini seçin.",
+    "account": "Hesap",
+    "profileInfo": "Profil Bilgileri",
+    "passwordAuth": "Şifre ve Kimlik Doğrulama",
+    "notifPrefs": "Bildirim Tercihleri",
+    "security": "Güvenlik",
+    "session": "Oturum Güvenliği",
+    "lastActive": "Son etkinlik: Az önce",
+    "secure": "Güvende",
+    "about": "Hakkında",
+    "terms": "Hizmet Şartları",
+    "privacy": "Gizlilik Politikası",
+    "version": "Sürüm",
+    "passwordHint": "Hesabınızı korumak için güçlü bir şifre seçin.",
+    "currentPassword": "MEVCUT ŞİFRE",
+    "newPassword": "YENİ ŞİFRE",
+    "passwordSave": "ŞİFREYİ GÜNCELLE",
+    "passwordChanged": "Şifreniz güncellendi.",
+    "passwordWrong": "Mevcut şifre hatalı.",
+    "passwordTooShort": "Yeni şifre en az 8 karakter olmalı.",
+    "notifPrefsHint": "Hangi türde bildirim almak istediğinizi seçin.",
+    "prefs": {
+      "recycle": {
+        "title": "Geri dönüşüm",
+        "desc": "Teslimat ve puan bildirimleri"
+      },
+      "marketplace": {
+        "title": "Pazaryeri",
+        "desc": "İlan ve satış güncellemeleri"
+      },
+      "rewards": {
+        "title": "Ödüller",
+        "desc": "Yeni ödül ve seviye bildirimleri"
+      },
+      "system": {
+        "title": "Sistem",
+        "desc": "Bakım ve duyurular"
+      }
+    }
+  },
+  "notifications": {
+    "all": "TÜMÜ ({{count}})",
+    "unread": "OKUNMAMIŞ ({{count}})",
+    "markAll": "Tümünü okundu işaretle",
+    "emptyTitle": "Henüz bildiriminiz yok",
+    "emptySub": "Yeni etkinlikler burada görünecek.",
+    "groups": {
+      "today": "BUGÜN",
+      "yesterday": "DÜN",
+      "older": "DAHA ESKİ"
+    }
+  },
+  "notFound": {
+    "code": "HATA KODU // ERR_404_NOT_FOUND",
+    "badge": "KAYIT BULUNAMADI",
+    "title": "Bu sayfa bulunamadı",
+    "body": "Aradığınız sayfa taşınmış, arşivlenmiş veya çevre envanteri dizininde hiç var olmamış olabilir.",
+    "path": "Hedef Yol",
+    "status": "Sistem Durumu",
+    "online": "Çekirdek Dizin Çevrimiçi",
+    "home": "Ana Sayfaya Dön",
+    "map": "Ağ Haritasını Aç",
+    "back": "Geri Dön",
+    "report": "Tanı Bildir",
+    "footer": "Döngüsel Ekonomi Platformu",
+    "support": "Destek"
+  }
+}

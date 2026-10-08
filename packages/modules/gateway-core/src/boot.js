@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { requestLogger, notFoundHandler } from '@restart/middlewares';
+import { requestLogger, notFoundHandler } from '@teknolup/middlewares';
 
 // serviceName: string, used in logs and the 404 body
 // corsOptions: passed straight to cors()
